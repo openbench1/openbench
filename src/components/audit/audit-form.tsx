@@ -118,7 +118,7 @@ export function AuditForm() {
   }
 
   return (
-    <div className="glass rounded-2xl p-6 sm:p-8 space-y-6">
+    <div className="bg-cyber-card border border-cyber-border rounded-2xl p-6 sm:p-8 space-y-6">
       {(error || fetchError) && (
         <Alert
           variant="destructive"
@@ -130,13 +130,13 @@ export function AuditForm() {
       )}
 
       {/* Tab Switcher */}
-      <div className="flex gap-2 p-1 rounded-xl bg-cyber-bg/50">
+      <div className="flex gap-1 p-1 rounded-lg bg-cyber-bg border border-cyber-border">
         <button
           onClick={() => setInputMode("address")}
           className={cn(
-            "flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all duration-200",
+            "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-md text-sm font-medium transition-all duration-200",
             inputMode === "address"
-              ? "glass text-neon-green shadow-[0_0_15px_rgba(0,255,65,0.1)]"
+              ? "bg-cyber-card-hover text-foreground"
               : "text-muted-foreground hover:text-foreground"
           )}
         >
@@ -146,9 +146,9 @@ export function AuditForm() {
         <button
           onClick={() => setInputMode("code")}
           className={cn(
-            "flex-1 flex items-center justify-center gap-2 py-3 rounded-lg text-sm font-medium transition-all duration-200",
+            "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-md text-sm font-medium transition-all duration-200",
             inputMode === "code"
-              ? "glass text-neon-green shadow-[0_0_15px_rgba(0,255,65,0.1)]"
+              ? "bg-cyber-card-hover text-foreground"
               : "text-muted-foreground hover:text-foreground"
           )}
         >
@@ -168,18 +168,16 @@ export function AuditForm() {
             <ChainSelector value={chainId} onChange={setChainId} />
           </div>
 
-          <div className="relative">
-            <input
-              type="text"
-              value={addressInput}
-              onChange={(e) => setAddressInput(e.target.value)}
-              placeholder={t("address.placeholder")}
-              className="w-full bg-cyber-bg/80 border border-cyber-border rounded-xl px-4 py-4 text-sm font-mono placeholder:text-muted-foreground/40 focus:outline-none focus:border-neon-green/50 focus:shadow-[0_0_15px_rgba(0,255,65,0.05)] transition-all"
-            />
-          </div>
+          <input
+            type="text"
+            value={addressInput}
+            onChange={(e) => setAddressInput(e.target.value)}
+            placeholder={t("address.placeholder")}
+            className="w-full bg-cyber-bg border border-cyber-border rounded-xl px-4 py-4 text-sm font-mono placeholder:text-muted-foreground/40 focus:outline-none focus:border-neon-blue/50 transition-all"
+          />
 
           {fetchedContract && (
-            <div className="flex items-center gap-2 text-sm text-neon-green glass rounded-lg px-4 py-3">
+            <div className="flex items-center gap-2 text-sm text-neon-green bg-neon-green/5 border border-neon-green/20 rounded-lg px-4 py-3">
               <CheckCircle2 className="h-4 w-4 shrink-0" />
               {t("address.found", { name: fetchedContract })}
             </div>
@@ -189,7 +187,7 @@ export function AuditForm() {
             onClick={handleFetchSource}
             disabled={!addressInput.trim() || fetchingSource}
             size="lg"
-            className="w-full bg-gradient-to-r from-neon-blue to-neon-blue/80 text-white font-bold text-base py-6 hover:shadow-neon-blue transition-all duration-300 disabled:opacity-50 rounded-xl group"
+            className="w-full bg-neon-blue text-white font-bold text-base py-6 hover:bg-neon-blue/90 transition-all disabled:opacity-50 rounded-xl group"
           >
             {fetchingSource ? (
               <>
@@ -221,7 +219,7 @@ export function AuditForm() {
               </label>
               <button
                 onClick={() => setSourceCode(EXAMPLE_CODE)}
-                className="inline-flex items-center gap-1.5 text-xs text-neon-blue hover:text-neon-green transition-colors glass rounded-full px-3 py-1"
+                className="inline-flex items-center gap-1.5 text-xs text-neon-blue hover:text-foreground transition-colors bg-cyber-bg border border-cyber-border rounded-full px-3 py-1"
               >
                 <FileCode2 className="h-3.5 w-3.5" />
                 {t("editor.loadExample")}
@@ -236,7 +234,7 @@ export function AuditForm() {
             onClick={handleSubmit}
             disabled={!sourceCode.trim() || isLoading}
             size="lg"
-            className="w-full bg-gradient-to-r from-neon-green to-neon-green/80 text-black font-bold text-base py-6 hover:shadow-neon-green transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl group"
+            className="w-full bg-neon-green text-black font-bold text-base py-6 hover:bg-neon-green/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-xl group"
           >
             <Shield className="mr-2 h-5 w-5" />
             {isLoading ? t("submitting") : t("submit")}

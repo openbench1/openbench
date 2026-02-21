@@ -33,15 +33,15 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-cyber-bg/80 backdrop-blur-xl border-b border-cyber-border"
+          ? "bg-cyber-bg/90 backdrop-blur-md border-b border-cyber-border"
           : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <Shield className="h-7 w-7 text-neon-green group-hover:animate-glow-pulse transition-all" />
-          <span className="text-xl font-bold text-gradient-green-blue tracking-tight">
+        <Link href="/" className="flex items-center gap-2">
+          <Shield className="h-6 w-6 text-neon-green" />
+          <span className="text-lg font-bold tracking-tight">
             OpenBench
           </span>
         </Link>
@@ -52,7 +52,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm text-muted-foreground hover:text-neon-green transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
             </Link>
@@ -60,12 +60,12 @@ export function Header() {
         </nav>
 
         {/* Right side */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
           <a
             href="https://x.com/openbench_lab"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-neon-green transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors"
           >
             <Twitter className="h-4 w-4" />
           </a>
@@ -75,7 +75,7 @@ export function Header() {
           <Button
             asChild
             size="sm"
-            className="bg-neon-green text-black font-semibold hover:shadow-neon-green transition-all"
+            className="bg-neon-green text-black font-semibold hover:bg-neon-green/90 transition-all"
           >
             <Link href="/scan">{t("launchApp")}</Link>
           </Button>
@@ -92,12 +92,12 @@ export function Header() {
 
       {/* Mobile Nav */}
       {mobileOpen && (
-        <div className="md:hidden bg-cyber-bg/95 backdrop-blur-xl border-b border-cyber-border p-4 space-y-4">
+        <div className="md:hidden bg-cyber-bg border-b border-cyber-border p-4 space-y-4">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="block text-sm text-muted-foreground hover:text-neon-green py-2"
+              className="block text-sm text-muted-foreground hover:text-foreground py-2"
               onClick={() => setMobileOpen(false)}
             >
               {link.label}
@@ -108,7 +108,7 @@ export function Header() {
               href="https://x.com/openbench_lab"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-neon-green transition-colors"
+              className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <Twitter className="h-4 w-4" />
             </a>

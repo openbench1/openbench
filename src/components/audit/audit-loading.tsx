@@ -43,7 +43,7 @@ export function AuditLoading() {
         <Loader2 className="absolute inset-0 h-20 w-20 animate-spin text-neon-green/30" />
       </motion.div>
 
-      <h3 className="text-2xl font-bold text-glow-green">{t("title")}</h3>
+      <h3 className="text-2xl font-bold text-neon-green">{t("title")}</h3>
 
       <div className="w-full max-w-md">
         <Progress value={progress} className="h-2" />

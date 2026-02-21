@@ -17,7 +17,7 @@ export function ScanLoading() {
         <Shield className="h-16 w-16 text-neon-green" />
         <Loader2 className="absolute inset-0 h-16 w-16 animate-spin text-neon-green/30" />
       </motion.div>
-      <h3 className="text-xl font-bold text-glow-green">
+      <h3 className="text-xl font-bold text-neon-green">
         {t("scanning")}
       </h3>
       <p className="text-sm text-muted-foreground">{t("scanningDesc")}</p>

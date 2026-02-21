@@ -38,9 +38,9 @@ const SUPPORTED_CONTRACTS = [
 ] as const;
 
 const WORKFLOW_STEPS = [
-  { key: "step1", icon: Upload, color: "text-neon-green" },
-  { key: "step2", icon: Brain, color: "text-neon-blue" },
-  { key: "step3", icon: FileText, color: "text-neon-green" },
+  { key: "step1", icon: Upload },
+  { key: "step2", icon: Brain },
+  { key: "step3", icon: FileText },
 ] as const;
 
 export function AuditCapabilities() {
@@ -52,17 +52,17 @@ export function AuditCapabilities() {
       <div>
         <h2 className="text-xl font-semibold mb-6 text-center">{t("howTitle")}</h2>
         <div className="grid sm:grid-cols-3 gap-4">
-          {WORKFLOW_STEPS.map(({ key, icon: Icon, color }, index) => (
+          {WORKFLOW_STEPS.map(({ key, icon: Icon }, index) => (
             <div
               key={key}
-              className="glass rounded-xl p-5 text-center relative"
+              className="bg-cyber-card border border-cyber-border rounded-xl p-5 text-center"
             >
               <div className="flex items-center justify-center mb-3">
-                <div className="h-10 w-10 rounded-lg icon-gradient-green flex items-center justify-center relative">
-                  <Icon className={`h-5 w-5 ${color}`} />
-                  <div className="absolute -top-1.5 -right-1.5 h-5 w-5 rounded-full bg-neon-green/20 border border-neon-green/40 flex items-center justify-center">
-                    <span className="text-[9px] font-bold text-neon-green">{index + 1}</span>
-                  </div>
+                <div className="h-10 w-10 rounded-full bg-cyber-card-hover border border-cyber-border flex items-center justify-center relative">
+                  <Icon className="h-5 w-5 text-neon-blue" />
+                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-neon-green text-black text-[9px] font-bold flex items-center justify-center">
+                    {index + 1}
+                  </span>
                 </div>
               </div>
               <h3 className="font-medium text-sm mb-1">{t(`workflow.${key}`)}</h3>
@@ -79,7 +79,7 @@ export function AuditCapabilities() {
           {VULNERABILITY_CATEGORIES.map(({ key, icon: Icon, color }) => (
             <div
               key={key}
-              className="glass rounded-lg p-3 flex items-start gap-3 hover:border-neon-green/20 transition-all"
+              className="bg-cyber-card border border-cyber-border rounded-lg p-3 flex items-start gap-3 hover:border-cyber-border-hover transition-all"
             >
               <Icon className={`h-4 w-4 mt-0.5 shrink-0 ${color}`} />
               <div>
@@ -101,9 +101,9 @@ export function AuditCapabilities() {
           {SUPPORTED_CONTRACTS.map(({ key, icon: Icon }) => (
             <div
               key={key}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg glass text-sm hover:border-neon-green/20 transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-cyber-card border border-cyber-border text-sm hover:border-cyber-border-hover transition-all"
             >
-              <Icon className="h-3.5 w-3.5 text-neon-green" />
+              <Icon className="h-3.5 w-3.5 text-neon-blue" />
               <span>{t(`contracts.${key}`)}</span>
             </div>
           ))}
