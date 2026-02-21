@@ -7,6 +7,7 @@ import { SessionProvider } from "@/components/auth/session-provider";
 import { Web3Provider } from "@/components/providers/web3-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { CursorTrail } from "@/components/effects/cursor-trail";
 
 export async function generateMetadata({
   params,
@@ -46,6 +47,7 @@ export default async function LocaleLayout({
     <SessionProvider>
       <Web3Provider>
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <CursorTrail />
           <div className="flex min-h-screen flex-col">
             <Header />
             <main className="flex-1">{children}</main>

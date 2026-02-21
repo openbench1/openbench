@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
-import { Shield, Twitter } from "lucide-react";
+import { Twitter } from "lucide-react";
+import { Logo } from "@/components/ui/logo";
 
 export function Footer() {
   const t = useTranslations("footer");
@@ -9,9 +10,8 @@ export function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center gap-2 mb-3">
-              <Shield className="h-5 w-5 text-neon-green" />
-              <span className="text-base font-semibold text-foreground">OpenBench</span>
+            <div className="mb-3">
+              <Logo iconSize={24} />
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               {t("description")}

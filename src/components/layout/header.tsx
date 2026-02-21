@@ -6,7 +6,8 @@ import { LanguageSwitcher } from "./language-switcher";
 import { UserButton } from "@/components/auth/user-button";
 import { WalletButton } from "@/components/auth/wallet-button";
 import { Button } from "@/components/ui/button";
-import { Shield, Menu, X, Twitter } from "lucide-react";
+import { Menu, X, Twitter } from "lucide-react";
+import { Logo } from "@/components/ui/logo";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
@@ -39,11 +40,8 @@ export function Header() {
     >
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <Shield className="h-6 w-6 text-neon-green" />
-          <span className="text-lg font-semibold tracking-tight text-foreground">
-            OpenBench
-          </span>
+        <Link href="/" className="flex items-center">
+          <Logo iconSize={28} />
         </Link>
 
         {/* Desktop Nav — center */}
