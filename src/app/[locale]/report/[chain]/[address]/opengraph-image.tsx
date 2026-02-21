@@ -123,7 +123,7 @@ export default async function OGImage({
             {address.slice(0, 6)}...{address.slice(-4)} on {chainName}
           </span>
           <span style={{ color: "#00d4ff", fontSize: "16px", fontWeight: 600 }}>
-            Scan free at openbench.app
+            Scan free at openbench.xyz
           </span>
         </div>
       </div>

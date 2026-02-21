@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "./language-switcher";
 import { UserButton } from "@/components/auth/user-button";
 import { Button } from "@/components/ui/button";
-import { Shield, Menu, X } from "lucide-react";
+import { Shield, Menu, X, Twitter } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
@@ -59,6 +59,14 @@ export function Header() {
 
         {/* Right side */}
         <div className="hidden md:flex items-center gap-4">
+          <a
+            href="https://x.com/openbench_lab"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-neon-green transition-colors"
+          >
+            <Twitter className="h-4 w-4" />
+          </a>
           <LanguageSwitcher />
           <UserButton />
           <Button
@@ -93,6 +101,14 @@ export function Header() {
             </Link>
           ))}
           <div className="flex items-center gap-4 pt-2">
+            <a
+              href="https://x.com/openbench_lab"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-neon-green transition-colors"
+            >
+              <Twitter className="h-4 w-4" />
+            </a>
             <LanguageSwitcher />
             <UserButton />
             <Button

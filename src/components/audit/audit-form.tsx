@@ -6,20 +6,17 @@ import { useRouter } from "@/i18n/navigation";
 import { useAudit } from "@/hooks/use-audit";
 import { CodeEditor } from "./code-editor";
 import { FileUpload } from "./file-upload";
-import { EngineSelector } from "./engine-selector";
 import { AuditLoading } from "./audit-loading";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
 import { Shield, AlertCircle } from "lucide-react";
-import type { AIEngine } from "@/lib/types";
 
 export function AuditForm() {
   const t = useTranslations("audit");
   const router = useRouter();
   const { isLoading, error, submitAudit } = useAudit();
   const [sourceCode, setSourceCode] = useState("");
-  const [engine, setEngine] = useState<AIEngine>("claude");
 
   const handleFileContent = (content: string) => {
     setSourceCode(content);
@@ -29,7 +26,7 @@ export function AuditForm() {
     if (!sourceCode.trim()) return;
 
     try {
-      const result = await submitAudit(sourceCode, engine);
+      const result = await submitAudit(sourceCode);
       router.push(`/report/${result.id}`);
     } catch {
       // Error is captured in useAudit state
@@ -60,10 +57,6 @@ export function AuditForm() {
       </div>
 
       <FileUpload onFileContent={handleFileContent} />
-
-      <Separator className="bg-cyber-border" />
-
-      <EngineSelector value={engine} onChange={setEngine} />
 
       <Separator className="bg-cyber-border" />
 

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createEngine } from "@/lib/ai/engine";
 import { auditStore } from "@/lib/store/store";
-import type { StoredAudit } from "@/lib/types";
+import type { AIEngine, StoredAudit } from "@/lib/types";
 import { nanoid } from "nanoid";
 import { getOptionalUserId } from "@/lib/auth/helpers";
 import { checkRateLimit } from "@/lib/rate-limit/check";
@@ -12,18 +12,12 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { code, engine: engineName, locale } = body;
+    const { code, locale } = body;
+    const engineName = (process.env.AI_ENGINE || "openai") as AIEngine;
 
     if (!code || typeof code !== "string" || code.trim().length < 10) {
       return NextResponse.json(
         { error: "Invalid Solidity code provided" },
-        { status: 400 }
-      );
-    }
-
-    if (!engineName || !["claude", "openai"].includes(engineName)) {
-      return NextResponse.json(
-        { error: "Invalid AI engine. Use 'claude' or 'openai'" },
         { status: 400 }
       );
     }

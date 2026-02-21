@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Shield } from "lucide-react";
+import { Shield, Twitter } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 export function Footer() {
@@ -19,6 +19,15 @@ export function Footer() {
             <p className="text-sm text-muted-foreground leading-relaxed">
               {t("description")}
             </p>
+            <a
+              href="https://x.com/openbench_lab"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-neon-green transition-colors mt-3"
+            >
+              <Twitter className="h-4 w-4" />
+              @openbench_lab
+            </a>
           </div>
           <div>
             <h4 className="font-semibold text-sm mb-3">{t("product")}</h4>

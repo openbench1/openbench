@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { AIEngine, StoredAudit } from "@/lib/types";
+import type { StoredAudit } from "@/lib/types";
 import { useLocale } from "next-intl";
 
 export function useAudit() {
@@ -10,8 +10,7 @@ export function useAudit() {
   const locale = useLocale();
 
   const submitAudit = async (
-    code: string,
-    engine: AIEngine
+    code: string
   ): Promise<StoredAudit> => {
     setIsLoading(true);
     setError(null);
@@ -20,7 +19,7 @@ export function useAudit() {
       const response = await fetch("/api/audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code, engine, locale }),
+        body: JSON.stringify({ code, locale }),
       });
 
       if (!response.ok) {

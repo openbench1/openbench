@@ -16,7 +16,7 @@ export default function HomePage() {
           name: "OpenBench",
           description:
             "EVMBench-powered smart contract security scanner. Detect honeypots, hidden taxes, and rug pull risks.",
-          url: "https://openbench.app",
+          url: "https://openbench.xyz",
           applicationCategory: "SecurityApplication",
           operatingSystem: "Web",
           offers: {

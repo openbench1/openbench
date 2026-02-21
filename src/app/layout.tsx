@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://openbench.app";
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://openbench.xyz";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
