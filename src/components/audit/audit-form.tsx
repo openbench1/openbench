@@ -10,7 +10,37 @@ import { AuditLoading } from "./audit-loading";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
-import { Shield, AlertCircle } from "lucide-react";
+import { Shield, AlertCircle, FileCode2 } from "lucide-react";
+
+const EXAMPLE_CODE = `// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MyToken is ERC20, Ownable {
+    uint256 public buyTax = 5;
+    uint256 public sellTax = 5;
+    mapping(address => bool) public blacklisted;
+
+    constructor() ERC20("MyToken", "MTK") Ownable(msg.sender) {
+        _mint(msg.sender, 1000000 * 10 ** decimals());
+    }
+
+    function setTax(uint256 _buyTax, uint256 _sellTax) external onlyOwner {
+        buyTax = _buyTax;
+        sellTax = _sellTax;
+    }
+
+    function blacklist(address account) external onlyOwner {
+        blacklisted[account] = true;
+    }
+
+    function _update(address from, address to, uint256 amount) internal override {
+        require(!blacklisted[from] && !blacklisted[to], "Blacklisted");
+        super._update(from, to, amount);
+    }
+}`;
 
 export function AuditForm() {
   const t = useTranslations("audit");
@@ -38,7 +68,7 @@ export function AuditForm() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {error && (
         <Alert
           variant="destructive"
@@ -50,9 +80,18 @@ export function AuditForm() {
       )}
 
       <div>
-        <label className="text-sm font-medium text-muted-foreground mb-2 block">
-          {t("editor.label")}
-        </label>
+        <div className="flex items-center justify-between mb-2">
+          <label className="text-sm font-medium text-muted-foreground">
+            {t("editor.label")}
+          </label>
+          <button
+            onClick={() => setSourceCode(EXAMPLE_CODE)}
+            className="inline-flex items-center gap-1.5 text-xs text-neon-blue hover:text-neon-green transition-colors"
+          >
+            <FileCode2 className="h-3.5 w-3.5" />
+            {t("editor.loadExample")}
+          </button>
+        </div>
         <CodeEditor value={sourceCode} onChange={setSourceCode} />
       </div>
 

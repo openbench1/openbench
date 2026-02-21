@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Shield, ArrowRight } from "lucide-react";
+import { Shield, ArrowRight, Code } from "lucide-react";
 
 export function HeroSection() {
   const t = useTranslations("hero");
@@ -79,7 +79,10 @@ export function HeroSection() {
             size="lg"
             className="border-cyber-border hover:border-neon-green/50 text-lg px-8 py-6"
           >
-            <Link href="/dashboard">{t("ctaSecondary")}</Link>
+            <Link href="/audit">
+              <Code className="mr-2 h-5 w-5" />
+              {t("ctaAudit")}
+            </Link>
           </Button>
         </motion.div>
       </div>

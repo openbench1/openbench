@@ -6,6 +6,7 @@
   "header": {
     "home": "Home",
     "scan": "Scan Token",
+    "audit": "AI Audit",
     "dashboard": "Dashboard",
     "launchApp": "Launch Scanner",
     "signIn": "Sign In",
@@ -18,6 +19,7 @@
     "titleEnd": "Detection",
     "subtitle": "Built on EVMBench, the smart contract security benchmark by OpenAI & Paradigm. Detect honeypots, hidden taxes, and rug pull risks instantly.",
     "cta": "Scan a Token Now",
+    "ctaAudit": "AI Code Audit",
     "ctaSecondary": "View Sample Report"
   },
   "stats": {
@@ -178,10 +180,41 @@
     }
   },
   "audit": {
-    "title": "AI Code Audit",
-    "subtitle": "Submit your Solidity code for AI-powered deep analysis",
+    "title": "AI Smart Contract Audit",
+    "subtitle": "Paste your Solidity source code or upload a .sol file. Our AI engine will analyze it for 15 categories of vulnerabilities, access control issues, and gas optimizations.",
+    "badge": "EVMBench AI Engine \u00b7 200+ Vulnerability Patterns",
+    "capabilities": {
+      "howTitle": "How It Works",
+      "howDesc": "Paste or upload your Solidity source code below. Our AI engine (powered by GPT-4o) analyzes it against the EVMBench vulnerability benchmark — covering 200+ known attack patterns. You'll receive a detailed security report with a score (0-100), vulnerability list, severity ratings, fix recommendations with code, and gas optimization suggestions.",
+      "detectTitle": "Vulnerability Detection (15 Categories)",
+      "detect": {
+        "reentrancy": "Reentrancy",
+        "reentrancyDesc": "Cross-function, cross-contract, read-only reentrancy",
+        "accessControl": "Access Control",
+        "accessControlDesc": "Missing modifiers, privilege escalation, tx.origin",
+        "flashLoan": "Flash Loan / MEV",
+        "flashLoanDesc": "Flash loan attacks, front-running, sandwich attacks",
+        "logicErrors": "Logic Errors",
+        "logicErrorsDesc": "Off-by-one, incorrect comparison, missing validation",
+        "frontRunning": "Oracle Manipulation",
+        "frontRunningDesc": "Price oracle attacks, TWAP manipulation",
+        "gasOptimization": "Gas Optimization",
+        "gasOptimizationDesc": "Excessive storage reads, redundant operations"
+      },
+      "detectMore": "+ 9 more categories: integer overflow, unchecked calls, DoS, delegate call injection, timestamp dependence, randomness exploits, token standard violations, centralization risks, etc.",
+      "contractsTitle": "Supported Contract Types",
+      "contracts": {
+        "erc20": "ERC-20 Tokens",
+        "erc721": "ERC-721 / ERC-1155 NFTs",
+        "defi": "DeFi Protocols (DEX, Lending, Vault)",
+        "proxy": "Proxy / Upgradeable Contracts",
+        "governance": "Governance & DAO",
+        "custom": "Any Solidity Contract"
+      }
+    },
     "editor": {
       "label": "Solidity Source Code",
+      "loadExample": "Load Example Contract",
       "placeholder": "// Paste your Solidity code here...\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract MyContract {\n    // ...\n}",
       "charCount": "{count} characters",
       "uploadLabel": "Or upload a file",
