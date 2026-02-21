@@ -31,9 +31,8 @@ export function CTASection() {
             </Button>
             <Button
               asChild
-              variant="outline"
               size="lg"
-              className="border-background/20 text-background hover:bg-background/10 text-base px-8 py-6 rounded-full"
+              className="bg-background text-foreground hover:bg-background/90 text-base px-8 py-6 rounded-full font-medium"
             >
               <Link href="/audit">
                 {t("buttonAudit")}

@@ -12,6 +12,7 @@ export function Footer() {
     <footer className="border-t border-gray-200 py-12">
       <div className="container mx-auto px-6">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="mb-3">
               <Logo iconSize={24} />
@@ -38,12 +39,34 @@ export function Footer() {
               </a>
             </div>
           </div>
+
+          {/* Products */}
           <div>
             <h4 className="font-semibold text-sm mb-3 text-foreground">{t("product")}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/scan" className="hover:text-foreground transition-colors">
-                  {t("scanLink")}
+                  {t("tokenLink")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/nft" className="hover:text-foreground transition-colors">
+                  {t("nftLink")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/nfa" className="hover:text-foreground transition-colors">
+                  {t("nfaLink")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/mev" className="hover:text-foreground transition-colors">
+                  {t("mevLink")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/flash-loan" className="hover:text-foreground transition-colors">
+                  {t("flashLoanLink")}
                 </Link>
               </li>
               <li>
@@ -51,24 +74,10 @@ export function Footer() {
                   {t("auditLink")}
                 </Link>
               </li>
-              <li>
-                <Link href="/dashboard" className="hover:text-foreground transition-colors">
-                  {t("dashboardLink")}
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/openbench1/openbench"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
-                >
-                  API
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-              </li>
             </ul>
           </div>
+
+          {/* Resources */}
           <div>
             <h4 className="font-semibold text-sm mb-3 text-foreground">{t("resources")}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
@@ -80,17 +89,6 @@ export function Footer() {
                   className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
                 >
                   {t("docsLink")}
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/openbench1/openbench/wiki"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
-                >
-                  {t("whitepaperLink")}
                   <ExternalLink className="h-3 w-3" />
                 </a>
               </li>
@@ -118,6 +116,8 @@ export function Footer() {
               </li>
             </ul>
           </div>
+
+          {/* Legal & Community */}
           <div>
             <h4 className="font-semibold text-sm mb-3 text-foreground">{t("legal")}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
@@ -140,6 +140,22 @@ export function Footer() {
                   className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
                 >
                   {t("termsLink")}
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </li>
+              <li>
+                <Link href="/dashboard" className="hover:text-foreground transition-colors">
+                  {t("dashboardLink")}
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="https://x.com/openbench_lab"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
+                >
+                  Twitter / X
                   <ExternalLink className="h-3 w-3" />
                 </a>
               </li>
