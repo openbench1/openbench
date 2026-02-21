@@ -296,8 +296,15 @@
   "footer": {
     "description": "EVMBench\u9a71\u52a8\u5b89\u5168\u68c0\u6d4b\u3002\u4fdd\u62a4\u6bcf\u4e00\u4f4d\u4ea4\u6613\u8005\uff0c\u8fdc\u79bb\u5783\u573e\u4ee3\u5e01\u3002",
     "product": "\u4ea7\u54c1",
+    "scanLink": "\u4ee3\u5e01\u68c0\u6d4b",
+    "auditLink": "AI\u5ba1\u8ba1",
+    "dashboardLink": "\u4eea\u8868\u76d8",
     "resources": "\u8d44\u6e90",
+    "docsLink": "\u6587\u6863",
+    "whitepaperLink": "\u767d\u76ae\u4e66",
     "legal": "\u6cd5\u5f8b",
+    "privacyLink": "\u9690\u79c1\u653f\u7b56",
+    "termsLink": "\u670d\u52a1\u6761\u6b3e",
     "copyright": "\u00a9 2026 OpenBench \u5f00\u6e90\u57fa\u51c6. \u4fdd\u7559\u6240\u6709\u6743\u5229\u3002"
   }
 }

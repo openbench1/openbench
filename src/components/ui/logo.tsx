@@ -18,29 +18,37 @@ export function Logo({ className, showText = true, iconSize = 28 }: LogoProps) {
         className="shrink-0"
       >
         <rect width="32" height="32" rx="6" fill="#171717" />
-        {/* Left "C" bracket — forms half of hexagonal shape */}
+        {/* C bracket — left side with 3D angle */}
         <path
-          d="M16 5 L6 10.5 L6 21.5 L16 27"
+          d="M16 4 L5 10 L5 22 L16 28"
           stroke="#ffffff"
-          strokeWidth="2.4"
+          strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
         />
-        {/* B top bump */}
+        {/* B spine — center vertical */}
         <path
-          d="M16 5 C22.5 5, 26 7.5, 26 10.5 C26 13.5, 22.5 16, 16 16"
+          d="M16 4 V28"
           stroke="#ffffff"
-          strokeWidth="2.4"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          fill="none"
+        />
+        {/* B top bump — rectangular */}
+        <path
+          d="M16 4 H25 V16 H16"
+          stroke="#ffffff"
+          strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
         />
-        {/* B bottom bump (slightly wider) */}
+        {/* B bottom bump — slightly wider */}
         <path
-          d="M16 16 C23 16, 27 18.5, 27 21.5 C27 24.5, 23 27, 16 27"
+          d="M16 16 H27 V28 H16"
           stroke="#ffffff"
-          strokeWidth="2.4"
+          strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
