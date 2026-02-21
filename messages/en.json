@@ -1,0 +1,237 @@
+{
+  "metadata": {
+    "title": "OpenBench - EVMBench-Powered Smart Contract Security",
+    "description": "Built on OpenAI & Paradigm's EVMBench standard. Detect honeypots, tax traps, and rug pull risks instantly."
+  },
+  "header": {
+    "home": "Home",
+    "scan": "Scan Token",
+    "dashboard": "Dashboard",
+    "launchApp": "Launch Scanner"
+  },
+  "hero": {
+    "badge": "Powered by EVMBench \u00b7 OpenAI \u00d7 Paradigm",
+    "title": "One-Click",
+    "titleHighlight": "Token Security",
+    "titleEnd": "Detection",
+    "subtitle": "Built on EVMBench, the smart contract security benchmark by OpenAI & Paradigm. Detect honeypots, hidden taxes, and rug pull risks instantly.",
+    "cta": "Scan a Token Now",
+    "ctaSecondary": "View Sample Report"
+  },
+  "stats": {
+    "contracts": "Tokens Scanned",
+    "contractsValue": "12,847",
+    "vulnerabilities": "Risks Detected",
+    "vulnerabilitiesValue": "43,291",
+    "value": "Value Protected",
+    "valueAmount": "$2.8B+",
+    "accuracy": "EVMBench Score",
+    "accuracyValue": "99.7%"
+  },
+  "features": {
+    "sectionTitle": "EVMBench-Standard Security Analysis",
+    "sectionSubtitle": "Industry-leading detection powered by OpenAI & Paradigm's security framework",
+    "scan": "Honeypot Detection",
+    "scanDesc": "EVMBench-validated honeypot detection. Instantly know if you can sell before you buy.",
+    "realtime": "Tax Analysis",
+    "realtimeDesc": "Detect hidden buy/sell taxes using EVMBench pattern matching. Avoid tokens that silently drain your funds.",
+    "multichain": "Multi-Chain Support",
+    "multichainDesc": "Scan tokens on Ethereum and BNB Chain with EVMBench-grade accuracy. More chains coming soon.",
+    "fix": "Holder Analysis",
+    "fixDesc": "See top holders and whale concentration. Spot insider wallets and potential dump risks with on-chain intelligence.",
+    "compliance": "Liquidity Check",
+    "complianceDesc": "Verify if liquidity is locked. Unlocked LP means the dev can pull the rug anytime.",
+    "monitor": "EVMBench AI Audit",
+    "monitorDesc": "Deep AI code analysis powered by the EVMBench framework. Detect 200+ vulnerability patterns in open-source contracts."
+  },
+  "howItWorks": {
+    "sectionTitle": "How It Works",
+    "step1": "Enter Contract Address",
+    "step1Desc": "Paste the token's contract address and select the blockchain (ETH or BSC).",
+    "step2": "EVMBench Analysis",
+    "step2Desc": "Our EVMBench-powered engine scans 15+ risk factors including honeypot, taxes, and contract permissions.",
+    "step3": "Read Your Report",
+    "step3Desc": "Get a clear, beginner-friendly safety report with a score and actionable risk checklist."
+  },
+  "cta": {
+    "title": "Don't Get Rugged. Scan First.",
+    "subtitle": "EVMBench-powered security. Free to use. No sign-up required.",
+    "button": "Start Scanning"
+  },
+  "evmbench": {
+    "title": "Powered by EVMBench",
+    "subtitle": "OpenAI \u00d7 Paradigm",
+    "description": "EVMBench is the industry-leading smart contract security benchmark developed by OpenAI and Paradigm. It evaluates AI models across 200+ vulnerability patterns including reentrancy, access control, arithmetic overflow, and more.",
+    "feature1": "200+ Vulnerability Patterns",
+    "feature1Desc": "Comprehensive coverage of known EVM attack vectors",
+    "feature2": "OpenAI & Paradigm Validated",
+    "feature2Desc": "Benchmarked by the world's leading AI and crypto research labs",
+    "feature3": "Real-Time Detection",
+    "feature3Desc": "Continuous updates based on the latest exploit discoveries",
+    "learnMore": "Learn More About EVMBench"
+  },
+  "scan": {
+    "title": "Token Security Scanner",
+    "subtitle": "Paste a contract address to check for honeypots, taxes, and rug pull risks",
+    "placeholder": "0x... Enter contract address",
+    "scanButton": "Scan Token",
+    "scanning": "Scanning Token...",
+    "scanningDesc": "Checking 15+ security risk factors. This usually takes a few seconds.",
+    "invalidAddress": "Invalid contract address. Must start with 0x followed by 40 hex characters.",
+    "tryExample": "Try an example:"
+  },
+  "report": {
+    "backToScan": "Back to Scanner",
+    "honeypotWarning": "HONEYPOT DETECTED!",
+    "honeypotDesc": "This token appears to be a honeypot. You may NOT be able to sell after buying. Do NOT buy this token.",
+    "scanAnother": "Scan Another Token",
+    "securityChecks": "Security Checklist",
+    "dangerItems": "danger",
+    "warningItems": "caution",
+    "safeItems": "safe",
+    "safety": {
+      "safe": "SAFE",
+      "caution": "CAUTION",
+      "danger": "DANGER",
+      "honeypot": "HONEYPOT"
+    },
+    "token": {
+      "verified": "Verified",
+      "unverified": "Unverified",
+      "address": "Contract Address",
+      "chain": "Blockchain",
+      "buyTax": "Buy Tax",
+      "sellTax": "Sell Tax",
+      "dex": "DEX",
+      "liquidity": "Liquidity"
+    },
+    "holders": {
+      "title": "Top Holders",
+      "whaleWarning": "{count} whale(s) holding >5% of supply",
+      "address": "Address",
+      "percent": "Holding %",
+      "tags": "Tags"
+    },
+    "liquidity": {
+      "title": "Liquidity Info",
+      "locked": "LP Locked",
+      "unlocked": "LP NOT Locked",
+      "lockedDesc": "{percent}% of liquidity is locked. Lower rug pull risk.",
+      "unlockedDesc": "Liquidity is not locked. The developer could remove liquidity at any time!",
+      "dex": "DEX",
+      "totalLiquidity": "Total Liquidity",
+      "lockPercent": "Lock Percent"
+    },
+    "title": "Audit Report",
+    "summary": "Summary",
+    "findings": "Findings",
+    "noVulnerabilities": "No vulnerabilities detected. Your contract passed all checks!",
+    "gasOptimization": "Gas Optimizations",
+    "severity": {
+      "critical": "Critical",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low",
+      "info": "Info",
+      "gas": "Gas"
+    },
+    "overview": {
+      "contractName": "Contract Name",
+      "engine": "AI Engine",
+      "timestamp": "Audit Date",
+      "linesOfCode": "Lines of Code",
+      "totalFindings": "Total Findings"
+    },
+    "card": {
+      "location": "Location",
+      "swcId": "SWC ID",
+      "impact": "Impact",
+      "recommendation": "Recommendation"
+    },
+    "actions": {
+      "download": "Download PDF",
+      "share": "Share",
+      "newAudit": "New Audit"
+    },
+    "evmbench": {
+      "title": "EVMBench Deep Analysis",
+      "description": "AI-powered code audit using the EVMBench framework by OpenAI & Paradigm",
+      "runAnalysis": "Run EVMBench Analysis",
+      "analyzing": "EVMBench Analysis in Progress...",
+      "analyzingDesc": "Scanning 200+ vulnerability patterns using the EVMBench AI engine. This may take a minute.",
+      "completed": "Analysis Complete",
+      "score": "Security Score: {score}/100",
+      "failed": "Analysis Failed",
+      "retry": "Retry Analysis",
+      "noSource": "This contract's source code is not verified. EVMBench deep analysis is only available for open-source contracts.",
+      "vulnerabilitiesFound": "{count} vulnerability(ies) detected"
+    },
+    "share": {
+      "copied": "Link copied!",
+      "twitter": "X (Twitter)",
+      "telegram": "Telegram",
+      "copyLink": "Copy Link",
+      "nativeShare": "Share...",
+      "tweetText": "{tokenName} (${tokenSymbol}) security report - Score: {score}/100 {status}. Scanned on OpenBench."
+    }
+  },
+  "audit": {
+    "title": "AI Code Audit",
+    "subtitle": "Submit your Solidity code for AI-powered deep analysis",
+    "editor": {
+      "label": "Solidity Source Code",
+      "placeholder": "// Paste your Solidity code here...\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract MyContract {\n    // ...\n}",
+      "charCount": "{count} characters",
+      "uploadLabel": "Or upload a file",
+      "uploadHint": "Drop your .sol file here or click to browse"
+    },
+    "engine": {
+      "label": "AI Engine",
+      "claude": "Claude (Anthropic)",
+      "claudeDesc": "Advanced reasoning, strong code analysis",
+      "openai": "GPT-4o (OpenAI)",
+      "openaiDesc": "Fast analysis, structured JSON output"
+    },
+    "submit": "Run Security Audit",
+    "submitting": "Analyzing...",
+    "loading": {
+      "title": "Analyzing Your Contract...",
+      "steps": {
+        "parsing": "Parsing contract structure...",
+        "patterns": "Scanning 200+ vulnerability patterns...",
+        "logic": "Analyzing business logic flaws...",
+        "gas": "Checking gas optimizations...",
+        "report": "Generating audit report..."
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Security Dashboard",
+    "subtitle": "Overview of all scan activities",
+    "stats": {
+      "totalScans": "Total Scans",
+      "dangerTokens": "Danger Tokens",
+      "safeTokens": "Safe Tokens",
+      "lastScan": "Last Scan"
+    },
+    "recentScans": {
+      "title": "Recent Scans",
+      "empty": "No scans yet. Scan your first token!",
+      "columns": {
+        "token": "Token",
+        "chain": "Chain",
+        "score": "Score",
+        "status": "Status",
+        "date": "Date",
+        "actions": "Actions"
+      }
+    }
+  },
+  "footer": {
+    "description": "EVMBench-powered security. Protecting traders from scam tokens, one scan at a time.",
+    "product": "Product",
+    "resources": "Resources",
+    "legal": "Legal",
+    "copyright": "\u00a9 2025 OpenBench. All rights reserved."
+  }
+}

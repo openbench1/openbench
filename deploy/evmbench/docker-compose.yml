@@ -1,0 +1,91 @@
+# EVMBench Full Stack Deployment
+# Reference: https://github.com/paradigmxyz/evmbench
+#
+# Deploy on your cloud server:
+#   1. Clone EVMBench: git clone https://github.com/paradigmxyz/evmbench.git
+#   2. Copy this file to the repo root (or use -f flag)
+#   3. Set OPENAI_API_KEY in .env
+#   4. Run: docker compose up -d
+#   5. API available at http://your-server:1337
+#   6. Set EVMBENCH_API_URL in OpenBench's .env
+
+services:
+  # FastAPI backend — main entry point
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "1337:1337"
+    environment:
+      - DATABASE_URL=postgresql://evmbench:evmbench@postgres:5432/evmbench
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Worker — Codex AI agent that performs vulnerability detection
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      - DATABASE_URL=postgresql://evmbench:evmbench@postgres:5432/evmbench
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Instancer — manages sandboxed execution environments
+  instancer:
+    build:
+      context: .
+      dockerfile: Dockerfile.instancer
+    environment:
+      - DATABASE_URL=postgresql://evmbench:evmbench@postgres:5432/evmbench
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # PostgreSQL — task and result storage
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=evmbench
+      - POSTGRES_PASSWORD=evmbench
+      - POSTGRES_DB=evmbench
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U evmbench"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # RabbitMQ — task queue between API and workers
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "15672:15672" # Management UI (optional, remove in production)
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
