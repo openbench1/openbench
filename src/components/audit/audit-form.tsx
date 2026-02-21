@@ -27,7 +27,7 @@ export function AuditForm() {
 
     try {
       const result = await submitAudit(sourceCode);
-      router.push(`/report/${result.id}`);
+      router.push(`/report/audit/${result.id}`);
     } catch {
       // Error is captured in useAudit state
     }

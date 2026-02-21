@@ -116,7 +116,7 @@ export function RecentAudits({ audits }: RecentAuditsProps) {
                           size="sm"
                           className="text-neon-green hover:text-neon-green"
                         >
-                          <Link href={`/report/${audit.id}`}>
+                          <Link href={`/report/audit/${audit.id}`}>
                             <Eye className="h-4 w-4" />
                           </Link>
                         </Button>
