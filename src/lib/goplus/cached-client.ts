@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { scanStore } from "@/lib/store/memory";
+import { scanStore } from "@/lib/store/store";
 import { getTokenSecurity } from "@/lib/goplus/client";
 import { parseScanResult } from "@/lib/goplus/parser";
 import { getChainById } from "@/lib/chains";

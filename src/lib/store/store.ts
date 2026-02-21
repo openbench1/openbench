@@ -1,7 +1,5 @@
-import type { ScanStore } from "../types";
+import { PrismaScanStore } from "../db/scan-store";
+import { PrismaAuditStore } from "../db/audit-store";
 
-// Re-export the interface for convenience
-export type { ScanStore };
-
-// Factory function - swap implementation here for database migration
-export { MemoryScanStore as DefaultScanStore } from "./memory";
+export const scanStore = new PrismaScanStore();
+export const auditStore = new PrismaAuditStore();

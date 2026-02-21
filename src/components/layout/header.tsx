@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "./language-switcher";
+import { UserButton } from "@/components/auth/user-button";
 import { Button } from "@/components/ui/button";
 import { Shield, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -59,6 +60,7 @@ export function Header() {
         {/* Right side */}
         <div className="hidden md:flex items-center gap-4">
           <LanguageSwitcher />
+          <UserButton />
           <Button
             asChild
             size="sm"
@@ -92,6 +94,7 @@ export function Header() {
           ))}
           <div className="flex items-center gap-4 pt-2">
             <LanguageSwitcher />
+            <UserButton />
             <Button
               asChild
               size="sm"

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auditStore } from "@/lib/store/memory";
+import { auditStore } from "@/lib/store/store";
 
 export async function GET(
   _request: NextRequest,

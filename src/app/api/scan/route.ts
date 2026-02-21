@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getTokenSecurity } from "@/lib/goplus/client";
 import { parseScanResult } from "@/lib/goplus/parser";
-import { scanStore } from "@/lib/store/memory";
+import { scanStore } from "@/lib/store/store";
 import { getChainById } from "@/lib/chains";
+import { getOptionalUserId } from "@/lib/auth/helpers";
+import { checkRateLimit } from "@/lib/rate-limit/check";
 
 export async function POST(request: NextRequest) {
+  const rateLimited = await checkRateLimit(request);
+  if (rateLimited) return rateLimited;
+
   try {
     const body = await request.json();
     const { address, chainId } = body;
@@ -48,7 +53,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const userId = await getOptionalUserId();
     const scanResult = parseScanResult(address, chainId, tokenData);
+    if (userId) scanResult.userId = userId;
     await scanStore.saveScan(scanResult);
 
     return NextResponse.json(scanResult, { status: 200 });

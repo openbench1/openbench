@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createEngine } from "@/lib/ai/engine";
-import { auditStore } from "@/lib/store/memory";
+import { auditStore } from "@/lib/store/store";
 import type { StoredAudit } from "@/lib/types";
 import { nanoid } from "nanoid";
+import { getOptionalUserId } from "@/lib/auth/helpers";
+import { checkRateLimit } from "@/lib/rate-limit/check";
 
 export async function POST(request: NextRequest) {
+  const rateLimited = await checkRateLimit(request);
+  if (rateLimited) return rateLimited;
+
   try {
     const body = await request.json();
     const { code, engine: engineName, locale } = body;
@@ -24,12 +29,14 @@ export async function POST(request: NextRequest) {
     }
 
     const id = nanoid(12);
+    const userId = await getOptionalUserId();
     const audit: StoredAudit = {
       id,
       engine: engineName,
       sourceCode: code,
       status: "analyzing",
       createdAt: new Date().toISOString(),
+      userId: userId ?? undefined,
     };
 
     await auditStore.saveAudit(audit);

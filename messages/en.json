@@ -7,7 +7,9 @@
     "home": "Home",
     "scan": "Scan Token",
     "dashboard": "Dashboard",
-    "launchApp": "Launch Scanner"
+    "launchApp": "Launch Scanner",
+    "signIn": "Sign In",
+    "signOut": "Sign Out"
   },
   "hero": {
     "badge": "Powered by EVMBench \u00b7 OpenAI \u00d7 Paradigm",

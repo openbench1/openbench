@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { auditStore } from "@/lib/store/memory";
+import { auditStore } from "@/lib/store/store";
 import { ReportHeader } from "@/components/report/report-header";
 import { ReportSummary } from "@/components/report/report-summary";
 import { VulnerabilityList } from "@/components/report/vulnerability-list";

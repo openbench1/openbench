@@ -7,7 +7,9 @@
     "home": "\u9996\u9875",
     "scan": "\u68c0\u6d4b\u4ee3\u5e01",
     "dashboard": "\u4eea\u8868\u76d8",
-    "launchApp": "\u5f00\u59cb\u68c0\u6d4b"
+    "launchApp": "\u5f00\u59cb\u68c0\u6d4b",
+    "signIn": "\u767b\u5f55",
+    "signOut": "\u9000\u51fa"
   },
   "hero": {
     "badge": "\u57fa\u4e8e EVMBench \u00b7 OpenAI \u00d7 Paradigm",

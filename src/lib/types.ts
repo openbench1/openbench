@@ -69,6 +69,7 @@ export interface ScanResult {
   isHoneypot: boolean;
   honeypotReason?: string;
   error?: string;
+  userId?: string;
 }
 
 export interface ScanStore {
@@ -153,6 +154,7 @@ export interface StoredAudit {
   error?: string;
   createdAt: string;
   completedAt?: string;
+  userId?: string;
 }
 
 export interface AuditStore {

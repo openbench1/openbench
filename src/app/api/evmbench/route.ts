@@ -2,8 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { getChainById } from "@/lib/chains";
 import { getContractSource } from "@/lib/etherscan/client";
 import { submitJob } from "@/lib/evmbench/client";
+import { checkRateLimit } from "@/lib/rate-limit/check";
 
 export async function POST(request: NextRequest) {
+  const rateLimited = await checkRateLimit(request);
+  if (rateLimited) return rateLimited;
+
   try {
     const body = await request.json();
     const { address, chainId } = body;

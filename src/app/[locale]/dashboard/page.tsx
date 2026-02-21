@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { scanStore } from "@/lib/store/memory";
+import { auth } from "@/lib/auth";
+import { scanStore, auditStore } from "@/lib/store/store";
 import { StatsCards } from "@/components/dashboard/stats-cards";
 import { RecentScans } from "@/components/dashboard/recent-scans";
+import { RecentAudits } from "@/components/dashboard/recent-audits";
 
 export async function generateMetadata({
   params,
@@ -19,9 +21,13 @@ export async function generateMetadata({
 
 export default async function DashboardPage() {
   const t = await getTranslations("dashboard");
-  const [stats, scans] = await Promise.all([
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  const [stats, scans, audits] = await Promise.all([
     scanStore.getDashboardStats(),
-    scanStore.getAllScans(),
+    userId ? scanStore.getUserScans(userId) : scanStore.getAllScans(),
+    userId ? auditStore.getUserAudits(userId) : auditStore.getAllAudits(),
   ]);
 
   return (
@@ -32,6 +38,7 @@ export default async function DashboardPage() {
       </div>
       <StatsCards stats={stats} />
       <RecentScans scans={scans} />
+      <RecentAudits audits={audits} />
     </div>
   );
 }
