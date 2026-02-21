@@ -27,7 +27,7 @@ export class PrismaScanStore implements ScanStore {
           chainId: scan.chainId,
         },
       },
-      update: data,
+      update: { ...data, createdAt: new Date(scan.createdAt) },
       create: {
         id: scan.id,
         address: scan.address.toLowerCase(),
@@ -40,7 +40,8 @@ export class PrismaScanStore implements ScanStore {
 
   async getScan(
     address: string,
-    chainId: string
+    chainId: string,
+    maxAgeMs: number = 3600000 // default 1 hour
   ): Promise<ScanResult | undefined> {
     const row = await prisma.scan.findUnique({
       where: {
@@ -51,6 +52,9 @@ export class PrismaScanStore implements ScanStore {
       },
     });
     if (!row) return undefined;
+    // Expire stale cache — re-scan if older than maxAge
+    const age = Date.now() - row.createdAt.getTime();
+    if (age > maxAgeMs) return undefined;
     return this.toScanResult(row);
   }
 
