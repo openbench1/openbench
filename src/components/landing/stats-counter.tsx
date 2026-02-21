@@ -6,7 +6,6 @@ import { useAnimatedCounter } from "@/hooks/use-animated-counter";
 const STATS = [
   { key: "contracts", value: 500, prefix: "", suffix: "+" },
   { key: "vulnerabilities", value: 1200, prefix: "", suffix: "+" },
-  { key: "value", prefix: "$", suffix: "M+", value: 50 },
   { key: "accuracy", prefix: "", suffix: "%", value: 99.7, isDecimal: true },
 ];
 
@@ -46,7 +45,7 @@ export function StatsCounter() {
     <section className="py-12">
       <div className="container mx-auto px-6">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-gray-100">
+          <div className="grid grid-cols-3 divide-x divide-gray-100">
             {STATS.map((stat) => (
               <StatItem
                 key={stat.key}

@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/landing/hero-section";
 import { StatsCounter } from "@/components/landing/stats-counter";
+import { ScanCategories } from "@/components/landing/scan-categories";
 import { EVMBenchSection } from "@/components/landing/evmbench-section";
 import { FeatureCards } from "@/components/landing/feature-cards";
 import { HowItWorks } from "@/components/landing/how-it-works";
@@ -28,6 +29,7 @@ export default function HomePage() {
       />
       <HeroSection />
       <StatsCounter />
+      <ScanCategories />
       <EVMBenchSection />
       <FeatureCards />
       <HowItWorks />

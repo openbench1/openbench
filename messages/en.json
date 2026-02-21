@@ -28,10 +28,17 @@
     "contractsValue": "500",
     "vulnerabilities": "Risks Detected",
     "vulnerabilitiesValue": "1,200",
-    "value": "Value Protected",
-    "valueAmount": "$50M+",
     "accuracy": "EVMBench Score",
     "accuracyValue": "99.7%"
+  },
+  "scanCategories": {
+    "title": "What Can You Scan?",
+    "subtitle": "Supports all types of EVM smart contracts. Click any example to view a live report.",
+    "token": "Tokens (ERC-20)",
+    "nft": "NFTs",
+    "defi": "DeFi Protocols",
+    "gamefi": "GameFi",
+    "meme": "Meme Coins"
   },
   "features": {
     "sectionTitle": "EVMBench-Standard Security Analysis",
