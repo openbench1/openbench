@@ -41,7 +41,7 @@ export function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <Shield className="h-7 w-7 text-neon-green group-hover:animate-glow-pulse transition-all" />
-          <span className="text-xl font-bold text-glow-green tracking-tight">
+          <span className="text-xl font-bold text-gradient-green-blue tracking-tight">
             OpenBench
           </span>
         </Link>

@@ -21,25 +21,36 @@ export default function AuditPage() {
   const t = useTranslations("audit");
 
   return (
-    <div className="container mx-auto px-4 py-24 max-w-4xl">
-      {/* Page Header */}
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neon-green/20 bg-neon-green/5 mb-4">
-          <span className="text-sm text-neon-green font-medium">
-            {t("badge")}
-          </span>
+    <div className="min-h-screen pt-20 relative">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" />
+      <div className="orb orb-green w-[300px] h-[300px] top-[5%] right-[10%]" style={{ opacity: 0.06 }} />
+      <div className="orb orb-blue w-[250px] h-[250px] bottom-[20%] left-[5%]" style={{ opacity: 0.06 }} />
+
+      <div className="container mx-auto px-4 py-12 max-w-5xl relative z-10">
+        {/* Page Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full glass mb-6">
+            <span className="text-sm text-neon-green font-medium">
+              {t("badge")}
+            </span>
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-bold mb-4">
+            <span className="text-gradient-green-blue">{t("titleHighlight")}</span>
+          </h1>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+            {t("subtitle")}
+          </p>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold mb-3">{t("title")}</h1>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          {t("subtitle")}
-        </p>
+
+        {/* Audit Form - main content */}
+        <div className="max-w-3xl mx-auto mb-16">
+          <AuditForm />
+        </div>
+
+        {/* Capabilities - below form */}
+        <AuditCapabilities />
       </div>
-
-      {/* Capabilities Overview */}
-      <AuditCapabilities />
-
-      {/* Audit Form */}
-      <AuditForm />
     </div>
   );
 }

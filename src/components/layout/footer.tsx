@@ -1,18 +1,17 @@
 import { useTranslations } from "next-intl";
 import { Shield, Twitter } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
 
 export function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="border-t border-cyber-border bg-cyber-card/30 py-12">
+    <footer className="border-t border-cyber-border bg-cyber-card/20 py-12">
       <div className="container mx-auto px-4">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2 mb-3">
               <Shield className="h-6 w-6 text-neon-green" />
-              <span className="text-lg font-bold text-glow-green">
+              <span className="text-lg font-bold text-gradient-green-blue">
                 OpenBench
               </span>
             </div>
@@ -69,10 +68,11 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <Separator className="bg-cyber-border my-8" />
-        <p className="text-center text-xs text-muted-foreground">
-          {t("copyright")}
-        </p>
+        <div className="border-t border-cyber-border mt-8 pt-8">
+          <p className="text-center text-xs text-muted-foreground/60">
+            {t("copyright")}
+          </p>
+        </div>
       </div>
     </footer>
   );

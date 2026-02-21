@@ -20,7 +20,8 @@
     "subtitle": "Built on EVMBench, the smart contract security benchmark by OpenAI & Paradigm. Detect honeypots, hidden taxes, and rug pull risks instantly.",
     "cta": "Scan a Token Now",
     "ctaAudit": "AI Code Audit",
-    "ctaSecondary": "View Sample Report"
+    "ctaSecondary": "View Sample Report",
+    "trustedBy": "Built with"
   },
   "stats": {
     "contracts": "Tokens Scanned",
@@ -50,6 +51,7 @@
   },
   "howItWorks": {
     "sectionTitle": "How It Works",
+    "sectionSubtitle": "Three simple steps to secure your investments",
     "step1": "Enter Contract Address",
     "step1Desc": "Paste the token's contract address and select the blockchain (ETH or BSC).",
     "step2": "EVMBench Analysis",
@@ -60,7 +62,8 @@
   "cta": {
     "title": "Don't Get Rugged. Scan First.",
     "subtitle": "EVMBench-powered security. Free to use. No sign-up required.",
-    "button": "Start Scanning"
+    "button": "Start Scanning",
+    "buttonAudit": "AI Code Audit"
   },
   "evmbench": {
     "title": "Powered by EVMBench",
@@ -181,11 +184,20 @@
   },
   "audit": {
     "title": "AI Smart Contract Audit",
-    "subtitle": "Paste your Solidity source code or upload a .sol file. Our AI engine will analyze it for 15 categories of vulnerabilities, access control issues, and gas optimizations.",
+    "titleHighlight": "AI Smart Contract Audit",
+    "subtitle": "Paste your Solidity source code, upload a .sol file, or enter a contract address. Our AI engine analyzes 15 categories of vulnerabilities, access control issues, and gas optimizations.",
     "badge": "EVMBench AI Engine \u00b7 200+ Vulnerability Patterns",
     "capabilities": {
       "howTitle": "How It Works",
       "howDesc": "Paste or upload your Solidity source code below. Our AI engine (powered by GPT-4o) analyzes it against the EVMBench vulnerability benchmark — covering 200+ known attack patterns. You'll receive a detailed security report with a score (0-100), vulnerability list, severity ratings, fix recommendations with code, and gas optimization suggestions.",
+      "workflow": {
+        "step1": "Submit Code",
+        "step1Desc": "Paste address, upload .sol file, or enter source code",
+        "step2": "AI Analysis",
+        "step2Desc": "GPT-4o scans 200+ vulnerability patterns via EVMBench",
+        "step3": "Get Report",
+        "step3Desc": "Detailed findings with severity, fix code, and gas tips"
+      },
       "detectTitle": "Vulnerability Detection (15 Categories)",
       "detect": {
         "reentrancy": "Reentrancy",

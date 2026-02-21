@@ -2,21 +2,28 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { Brain, ShieldCheck, Zap } from "lucide-react";
+import { Brain, ShieldCheck, Zap, ExternalLink } from "lucide-react";
 
 const FEATURES = [
-  { key: "feature1", icon: Brain },
-  { key: "feature2", icon: ShieldCheck },
-  { key: "feature3", icon: Zap },
+  { key: "feature1", icon: Brain, color: "blue" as const },
+  { key: "feature2", icon: ShieldCheck, color: "green" as const },
+  { key: "feature3", icon: Zap, color: "purple" as const },
 ] as const;
+
+const colorMap = {
+  blue: { icon: "text-neon-blue", bg: "icon-gradient-blue", ring: "ring-neon-blue/20" },
+  green: { icon: "text-neon-green", bg: "icon-gradient-green", ring: "ring-neon-green/20" },
+  purple: { icon: "text-neon-purple", bg: "bg-neon-purple/10", ring: "ring-neon-purple/20" },
+};
 
 export function EVMBenchSection() {
   const t = useTranslations("evmbench");
 
   return (
     <section className="py-20 relative overflow-hidden">
-      {/* Background glow effect */}
+      {/* Background glow */}
       <div className="absolute inset-0 bg-gradient-to-b from-neon-blue/5 via-transparent to-transparent" />
+      <div className="orb orb-blue w-[300px] h-[300px] top-[20%] right-[5%]" style={{ opacity: 0.08 }} />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -24,11 +31,11 @@ export function EVMBenchSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-5xl mx-auto"
         >
           {/* Header */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neon-blue/30 bg-neon-blue/5 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-6">
               <span className="text-sm text-neon-blue font-semibold">
                 {t("subtitle")}
               </span>
@@ -42,25 +49,28 @@ export function EVMBenchSection() {
           </div>
 
           {/* Feature cards */}
-          <div className="grid sm:grid-cols-3 gap-6 mb-10">
-            {FEATURES.map(({ key, icon: Icon }, index) => (
-              <motion.div
-                key={key}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="text-center p-6 rounded-xl border border-neon-blue/20 bg-neon-blue/5 hover:border-neon-blue/40 transition-all"
-              >
-                <div className="h-12 w-12 rounded-lg bg-neon-blue/10 flex items-center justify-center mx-auto mb-4">
-                  <Icon className="h-6 w-6 text-neon-blue" />
-                </div>
-                <h3 className="font-semibold mb-2">{t(key)}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {t(`${key}Desc`)}
-                </p>
-              </motion.div>
-            ))}
+          <div className="grid sm:grid-cols-3 gap-5 mb-10">
+            {FEATURES.map(({ key, icon: Icon, color }, index) => {
+              const styles = colorMap[color];
+              return (
+                <motion.div
+                  key={key}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="glass rounded-xl p-6 text-center hover:border-neon-blue/20 transition-all duration-300"
+                >
+                  <div className={`h-14 w-14 rounded-xl ${styles.bg} flex items-center justify-center mx-auto mb-4`}>
+                    <Icon className={`h-7 w-7 ${styles.icon}`} />
+                  </div>
+                  <h3 className="font-semibold mb-2 text-lg">{t(key)}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {t(`${key}Desc`)}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Learn more link */}
@@ -69,10 +79,10 @@ export function EVMBenchSection() {
               href="https://openai.com/index/introducing-evmbench/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-neon-blue hover:text-neon-green transition-colors text-sm font-medium"
+              className="inline-flex items-center gap-2 text-neon-blue hover:text-neon-green transition-colors text-sm font-medium glass rounded-full px-5 py-2.5"
             >
               {t("learnMore")}
-              <span>&rarr;</span>
+              <ExternalLink className="h-3.5 w-3.5" />
             </a>
           </div>
         </motion.div>
