@@ -18,45 +18,29 @@ export function Logo({ className, showText = true, iconSize = 28 }: LogoProps) {
         className="shrink-0"
       >
         <rect width="32" height="32" rx="6" fill="#171717" />
+        {/* Left "C" bracket — forms half of hexagonal shape */}
         <path
-          d="M8 11C8 11 8 8 16 5.5C24 8 24 11 24 11V17.5C24 22.5 20.5 25.8 16 27C11.5 25.8 8 22.5 8 17.5V11Z"
-          fill="#ffffff"
-          fillOpacity="0.1"
+          d="M16 5 L6 10.5 L6 21.5 L16 27"
           stroke="#ffffff"
-          strokeWidth="1.2"
-        />
-        <path
-          d="M16 10V22"
-          stroke="#ffffff"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-        />
-        <path
-          d="M12 13.5C12 11.567 13.567 10 15.5 10"
-          stroke="#ffffff"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          fill="none"
-        />
-        <path
-          d="M12 18.5C12 20.433 13.567 22 15.5 22"
-          stroke="#ffffff"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          fill="none"
-        />
-        <path
-          d="M16 10H18.5C19.88 10 21 11.12 21 12.5C21 13.88 19.88 15.5 18.5 15.5H16"
-          stroke="#ffffff"
-          strokeWidth="1.8"
+          strokeWidth="2.4"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
         />
+        {/* B top bump */}
         <path
-          d="M16 16.5H19C20.38 16.5 21.5 17.62 21.5 19C21.5 20.38 20.38 22 19 22H16"
+          d="M16 5 C22.5 5, 26 7.5, 26 10.5 C26 13.5, 22.5 16, 16 16"
           stroke="#ffffff"
-          strokeWidth="1.8"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+        {/* B bottom bump (slightly wider) */}
+        <path
+          d="M16 16 C23 16, 27 18.5, 27 21.5 C27 24.5, 23 27, 16 27"
+          stroke="#ffffff"
+          strokeWidth="2.4"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
