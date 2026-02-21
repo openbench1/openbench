@@ -33,13 +33,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check cache first
-    const cached = await scanStore.getScan(address, chainId);
-    if (cached) {
-      return NextResponse.json(cached, { status: 200 });
-    }
-
-    // Call GoPlus API
+    // Always fetch fresh data from GoPlus (no DB cache for scan API)
     const goplusResult = await getTokenSecurity(
       chain.goplusChainId,
       address

@@ -10,7 +10,8 @@ export const getCachedScan = cache(
     const chain = getChainById(chainId);
     if (!chain) return null;
 
-    const cached = await scanStore.getScan(address, chainId);
+    // 10 minute TTL for report page cache
+    const cached = await scanStore.getScan(address, chainId, 600000);
     if (cached) return cached;
 
     try {

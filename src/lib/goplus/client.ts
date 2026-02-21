@@ -13,7 +13,7 @@ export async function getTokenSecurity(
 
   const response = await fetch(url, {
     headers: { Accept: "application/json" },
-    next: { revalidate: 300 }, // cache 5 minutes
+    cache: "no-store", // always fetch fresh data
   });
 
   if (!response.ok) {
