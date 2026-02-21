@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { Brain, Loader2, CheckCircle2, XCircle } from "lucide-react";
@@ -13,60 +13,20 @@ import type { AuditReport } from "@/lib/types";
 interface EVMBenchAuditProps {
   address: string;
   chainId: string;
-  isOpenSource?: boolean;
 }
 
 type AuditState =
   | { phase: "idle" }
-  | { phase: "submitting" }
-  | { phase: "polling"; jobId: string }
+  | { phase: "analyzing" }
   | { phase: "completed"; report: AuditReport }
   | { phase: "failed"; error: string };
-
-const POLL_INTERVAL = 3000;
 
 export function EVMBenchAudit({ address, chainId }: EVMBenchAuditProps) {
   const t = useTranslations("report.evmbench");
   const [state, setState] = useState<AuditState>({ phase: "idle" });
-  const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const stopPolling = useCallback(() => {
-    if (pollingRef.current) {
-      clearInterval(pollingRef.current);
-      pollingRef.current = null;
-    }
-  }, []);
-
-  useEffect(() => {
-    return () => stopPolling();
-  }, [stopPolling]);
-
-  const pollStatus = useCallback(
-    (jobId: string) => {
-      pollingRef.current = setInterval(async () => {
-        try {
-          const res = await fetch(`/api/evmbench/${jobId}`);
-          const data = await res.json();
-
-          if (data.status === "completed" && data.report) {
-            stopPolling();
-            setState({ phase: "completed", report: data.report });
-          } else if (data.status === "failed") {
-            stopPolling();
-            setState({ phase: "failed", error: data.error || "Analysis failed" });
-          }
-          // Otherwise keep polling (queued/running)
-        } catch {
-          stopPolling();
-          setState({ phase: "failed", error: "Connection lost" });
-        }
-      }, POLL_INTERVAL);
-    },
-    [stopPolling]
-  );
 
   const startAnalysis = useCallback(async () => {
-    setState({ phase: "submitting" });
+    setState({ phase: "analyzing" });
     try {
       const res = await fetch("/api/evmbench", {
         method: "POST",
@@ -77,16 +37,19 @@ export function EVMBenchAudit({ address, chainId }: EVMBenchAuditProps) {
       const data = await res.json();
 
       if (!res.ok) {
-        setState({ phase: "failed", error: data.error || "Failed to start analysis" });
+        setState({ phase: "failed", error: data.error || "Analysis failed" });
         return;
       }
 
-      setState({ phase: "polling", jobId: data.jobId });
-      pollStatus(data.jobId);
+      if (data.status === "completed" && data.report) {
+        setState({ phase: "completed", report: data.report });
+      } else {
+        setState({ phase: "failed", error: data.error || "No report returned" });
+      }
     } catch {
       setState({ phase: "failed", error: "Network error" });
     }
-  }, [address, chainId, pollStatus]);
+  }, [address, chainId]);
 
   return (
     <Card className="bg-cyber-card border-cyber-border">
@@ -116,8 +79,8 @@ export function EVMBenchAudit({ address, chainId }: EVMBenchAuditProps) {
 
       <CardContent>
         <AnimatePresence mode="wait">
-          {/* Submitting / Polling */}
-          {(state.phase === "submitting" || state.phase === "polling") && (
+          {/* Analyzing */}
+          {state.phase === "analyzing" && (
             <motion.div
               key="loading"
               initial={{ opacity: 0, y: 10 }}

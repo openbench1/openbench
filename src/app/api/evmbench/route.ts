@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getChainById } from "@/lib/chains";
 import { getContractSource } from "@/lib/etherscan/client";
-import { submitJob } from "@/lib/evmbench/client";
+import { createEngine } from "@/lib/ai/engine";
 import { checkRateLimit } from "@/lib/rate-limit/check";
+import type { AIEngine } from "@/lib/types";
+
+// Run in US region to avoid OpenAI geo-blocking
+export const preferredRegion = "iad1";
 
 export async function POST(request: NextRequest) {
   const rateLimited = await checkRateLimit(request);
@@ -41,23 +45,29 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Submit to EVMBench for analysis
-    const { job } = await submitJob(source.sourceCode, "detect");
+    // Analyze directly with AI engine (no external EVMBench server needed)
+    const engineName = (process.env.AI_ENGINE || "openai") as AIEngine;
+    const engine = createEngine(engineName);
+    const report = await engine.analyze({
+      code: source.sourceCode,
+      locale: "en",
+    });
+
+    if (source.contractName) {
+      report.contractName = source.contractName;
+    }
+    report.linesOfCode = source.sourceCode.split("\n").length;
 
     return NextResponse.json(
-      {
-        jobId: job.id,
-        status: job.status,
-        contractName: source.contractName,
-      },
+      { status: "completed", report },
       { status: 200 }
     );
   } catch (error: unknown) {
     const message =
       error instanceof Error ? error.message : "Unknown error occurred";
-    console.error("EVMBench submit error:", message);
+    console.error("EVMBench analysis error:", message);
     return NextResponse.json(
-      { error: "EVMBench analysis failed to start", message },
+      { error: "Analysis failed", message },
       { status: 500 }
     );
   }
