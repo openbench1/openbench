@@ -1,17 +1,16 @@
-const API_URLS: Record<string, string> = {
-  "1": "https://api.etherscan.io/api",
-  "56": "https://api.bscscan.com/api",
-};
+// Etherscan API V2 — single endpoint, chainid param, one key for all chains
+const ETHERSCAN_V2_BASE = "https://api.etherscan.io/v2/api";
 
-const API_KEYS: Record<string, string | undefined> = {
-  "1": process.env.ETHERSCAN_API_KEY,
-  "56": process.env.BSCSCAN_API_KEY,
+// Our internal chainId → Etherscan numeric chainid
+const CHAIN_IDS: Record<string, string> = {
+  "1": "1",   // Ethereum Mainnet
+  "56": "56", // BSC Mainnet
 };
 
 interface EtherscanSourceResponse {
   status: string;
   message: string;
-  result: EtherscanSourceResult[];
+  result: EtherscanSourceResult[] | string;
 }
 
 interface EtherscanSourceResult {
@@ -41,20 +40,26 @@ export async function getContractSource(
   address: string,
   chainId: string
 ): Promise<ContractSource | null> {
-  const baseUrl = API_URLS[chainId];
-  if (!baseUrl) return null;
+  const etherscanChainId = CHAIN_IDS[chainId];
+  if (!etherscanChainId) return null;
 
-  const apiKey = API_KEYS[chainId];
+  const apiKey = process.env.ETHERSCAN_API_KEY;
+  if (!apiKey) {
+    console.error("ETHERSCAN_API_KEY is not set — required for Etherscan V2 API");
+    return null;
+  }
+
   const params = new URLSearchParams({
+    chainid: etherscanChainId,
     module: "contract",
     action: "getsourcecode",
     address: address.toLowerCase(),
-    ...(apiKey ? { apikey: apiKey } : {}),
+    apikey: apiKey,
   });
 
-  const response = await fetch(`${baseUrl}?${params}`, {
+  const response = await fetch(`${ETHERSCAN_V2_BASE}?${params}`, {
     headers: { Accept: "application/json" },
-    next: { revalidate: 3600 }, // cache 1 hour
+    next: { revalidate: 3600 },
   });
 
   if (!response.ok) {
@@ -63,7 +68,7 @@ export async function getContractSource(
 
   const data: EtherscanSourceResponse = await response.json();
 
-  if (data.status !== "1" || !data.result?.[0]) {
+  if (data.status !== "1" || !Array.isArray(data.result) || !data.result[0]) {
     return null;
   }
 
