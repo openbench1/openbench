@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { LanguageSwitcher } from "./language-switcher";
 import { UserButton } from "@/components/auth/user-button";
+import { WalletButton } from "@/components/auth/wallet-button";
 import { Button } from "@/components/ui/button";
 import { Shield, Menu, X, Twitter } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -68,6 +69,7 @@ export function Header() {
             <Twitter className="h-4 w-4" />
           </a>
           <LanguageSwitcher />
+          <WalletButton />
           <UserButton />
           <Button
             asChild
@@ -110,6 +112,7 @@ export function Header() {
               <Twitter className="h-4 w-4" />
             </a>
             <LanguageSwitcher />
+            <WalletButton />
             <UserButton />
             <Button
               asChild

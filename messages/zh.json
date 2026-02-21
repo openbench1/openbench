@@ -22,17 +22,17 @@
   },
   "stats": {
     "contracts": "\u5df2\u68c0\u6d4b\u4ee3\u5e01",
-    "contractsValue": "12,847",
+    "contractsValue": "500",
     "vulnerabilities": "\u5df2\u53d1\u73b0\u98ce\u9669",
-    "vulnerabilitiesValue": "43,291",
+    "vulnerabilitiesValue": "1,200",
     "value": "\u5df2\u4fdd\u62a4\u8d44\u4ea7",
-    "valueAmount": "$2.8B+",
+    "valueAmount": "$50M+",
     "accuracy": "EVMBench\u8bc4\u5206",
     "accuracyValue": "99.7%"
   },
   "features": {
     "sectionTitle": "EVMBench\u6807\u51c6\u5b89\u5168\u5206\u6790",
-    "sectionSubtitle": "\u57fa\u4e8eOpenAI\u00d7Paradigm\u5b89\u5168\u6846\u67b6\uff0c\u884c\u4e1a\u9886\u5148\u7684\u68c0\u6d4b\u80fd\u529b",
+    "sectionSubtitle": "\u57fa\u4e8e OpenAI \u00d7 Paradigm EVMBench \u5b89\u5168\u6846\u67b6\u7684\u667a\u80fd\u5408\u7ea6\u5b89\u5168\u5206\u6790",
     "scan": "\u8c82\u8c85/\u871c\u7f50\u68c0\u6d4b",
     "scanDesc": "EVMBench\u9a8c\u8bc1\u7684\u8c82\u8c85\u68c0\u6d4b\u3002\u4e70\u5165\u524d\u79d2\u7ea7\u786e\u8ba4\u80fd\u4e0d\u80fd\u5356\u3002",
     "realtime": "\u7a0e\u7387\u5206\u6790",
@@ -63,7 +63,7 @@
   "evmbench": {
     "title": "\u57fa\u4e8e EVMBench \u6807\u51c6",
     "subtitle": "OpenAI \u00d7 Paradigm",
-    "description": "EVMBench \u662f\u7531 OpenAI \u548c Paradigm \u8054\u5408\u5f00\u53d1\u7684\u884c\u4e1a\u9886\u5148\u667a\u80fd\u5408\u7ea6\u5b89\u5168\u57fa\u51c6\u3002\u8986\u76d6\u91cd\u5165\u653b\u51fb\u3001\u8bbf\u95ee\u63a7\u5236\u3001\u7b97\u672f\u6ea2\u51fa\u7b49200+\u6f0f\u6d1e\u6a21\u5f0f\u3002",
+    "description": "EVMBench \u662f\u7531 OpenAI \u548c Paradigm \u8054\u5408\u5f00\u53d1\u7684\u5168\u9762\u667a\u80fd\u5408\u7ea6\u5b89\u5168\u57fa\u51c6\u3002\u8986\u76d6\u91cd\u5165\u653b\u51fb\u3001\u8bbf\u95ee\u63a7\u5236\u3001\u7b97\u672f\u6ea2\u51fa\u7b49200+\u6f0f\u6d1e\u6a21\u5f0f\u3002",
     "feature1": "200+ \u6f0f\u6d1e\u6a21\u5f0f",
     "feature1Desc": "\u5168\u9762\u8986\u76d6\u5df2\u77e5EVM\u653b\u51fb\u5411\u91cf",
     "feature2": "OpenAI & Paradigm \u9a8c\u8bc1",
@@ -234,6 +234,6 @@
     "product": "\u4ea7\u54c1",
     "resources": "\u8d44\u6e90",
     "legal": "\u6cd5\u5f8b",
-    "copyright": "\u00a9 2025 OpenBench \u5f00\u6e90\u57fa\u51c6. \u4fdd\u7559\u6240\u6709\u6743\u5229\u3002"
+    "copyright": "\u00a9 2026 OpenBench \u5f00\u6e90\u57fa\u51c6. \u4fdd\u7559\u6240\u6709\u6743\u5229\u3002"
   }
 }

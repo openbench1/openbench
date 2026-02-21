@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { SessionProvider } from "@/components/auth/session-provider";
+import { Web3Provider } from "@/components/providers/web3-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
@@ -43,13 +44,15 @@ export default async function LocaleLayout({
 
   return (
     <SessionProvider>
-      <NextIntlClientProvider locale={locale} messages={messages}>
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
-      </NextIntlClientProvider>
+      <Web3Provider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </NextIntlClientProvider>
+      </Web3Provider>
     </SessionProvider>
   );
 }

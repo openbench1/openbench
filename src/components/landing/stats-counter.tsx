@@ -5,9 +5,9 @@ import { useAnimatedCounter } from "@/hooks/use-animated-counter";
 import { Shield, Bug, DollarSign, Target } from "lucide-react";
 
 const STATS = [
-  { key: "contracts", value: 12847, icon: Shield, prefix: "", suffix: "+" },
-  { key: "vulnerabilities", value: 43291, icon: Bug, prefix: "", suffix: "+" },
-  { key: "value", icon: DollarSign, prefix: "$", suffix: "B+", value: 2.8, isDecimal: true },
+  { key: "contracts", value: 500, icon: Shield, prefix: "", suffix: "+" },
+  { key: "vulnerabilities", value: 1200, icon: Bug, prefix: "", suffix: "+" },
+  { key: "value", icon: DollarSign, prefix: "$", suffix: "M+", value: 50 },
   { key: "accuracy", icon: Target, prefix: "", suffix: "%", value: 99.7, isDecimal: true },
 ] as const;
 

@@ -22,17 +22,17 @@
   },
   "stats": {
     "contracts": "Tokens Scanned",
-    "contractsValue": "12,847",
+    "contractsValue": "500",
     "vulnerabilities": "Risks Detected",
-    "vulnerabilitiesValue": "43,291",
+    "vulnerabilitiesValue": "1,200",
     "value": "Value Protected",
-    "valueAmount": "$2.8B+",
+    "valueAmount": "$50M+",
     "accuracy": "EVMBench Score",
     "accuracyValue": "99.7%"
   },
   "features": {
     "sectionTitle": "EVMBench-Standard Security Analysis",
-    "sectionSubtitle": "Industry-leading detection powered by OpenAI & Paradigm's security framework",
+    "sectionSubtitle": "Smart contract security analysis powered by OpenAI & Paradigm's EVMBench framework",
     "scan": "Honeypot Detection",
     "scanDesc": "EVMBench-validated honeypot detection. Instantly know if you can sell before you buy.",
     "realtime": "Tax Analysis",
@@ -63,7 +63,7 @@
   "evmbench": {
     "title": "Powered by EVMBench",
     "subtitle": "OpenAI \u00d7 Paradigm",
-    "description": "EVMBench is the industry-leading smart contract security benchmark developed by OpenAI and Paradigm. It evaluates AI models across 200+ vulnerability patterns including reentrancy, access control, arithmetic overflow, and more.",
+    "description": "EVMBench is a comprehensive smart contract security benchmark developed by OpenAI and Paradigm. It evaluates AI models across 200+ vulnerability patterns including reentrancy, access control, arithmetic overflow, and more.",
     "feature1": "200+ Vulnerability Patterns",
     "feature1Desc": "Comprehensive coverage of known EVM attack vectors",
     "feature2": "OpenAI & Paradigm Validated",
@@ -234,6 +234,6 @@
     "product": "Product",
     "resources": "Resources",
     "legal": "Legal",
-    "copyright": "\u00a9 2025 OpenBench. All rights reserved."
+    "copyright": "\u00a9 2026 OpenBench. All rights reserved."
   }
 }
