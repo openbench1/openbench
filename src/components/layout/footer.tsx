@@ -5,13 +5,13 @@ export function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="border-t border-cyber-border py-12">
-      <div className="container mx-auto px-4">
+    <footer className="border-t border-gray-200 py-12">
+      <div className="container mx-auto px-6">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2 mb-3">
               <Shield className="h-5 w-5 text-neon-green" />
-              <span className="text-base font-bold">OpenBench</span>
+              <span className="text-base font-semibold text-foreground">OpenBench</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               {t("description")}
@@ -27,7 +27,7 @@ export function Footer() {
             </a>
           </div>
           <div>
-            <h4 className="font-semibold text-sm mb-3">{t("product")}</h4>
+            <h4 className="font-semibold text-sm mb-3 text-foreground">{t("product")}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="hover:text-foreground cursor-pointer transition-colors">
                 Audit
@@ -41,7 +41,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-sm mb-3">{t("resources")}</h4>
+            <h4 className="font-semibold text-sm mb-3 text-foreground">{t("resources")}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="hover:text-foreground cursor-pointer transition-colors">
                 Documentation
@@ -55,7 +55,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-sm mb-3">{t("legal")}</h4>
+            <h4 className="font-semibold text-sm mb-3 text-foreground">{t("legal")}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="hover:text-foreground cursor-pointer transition-colors">
                 Privacy
@@ -66,8 +66,8 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="border-t border-cyber-border mt-8 pt-8">
-          <p className="text-center text-xs text-muted-foreground/60">
+        <div className="border-t border-gray-200 mt-8 pt-8">
+          <p className="text-center text-xs text-muted-foreground">
             {t("copyright")}
           </p>
         </div>

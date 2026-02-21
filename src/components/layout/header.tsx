@@ -33,20 +33,20 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-cyber-bg/90 backdrop-blur-md border-b border-cyber-border"
+          ? "bg-white/80 backdrop-blur-md border-b border-gray-200/60 shadow-sm"
           : "bg-transparent"
       )}
     >
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+      <div className="container mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Shield className="h-6 w-6 text-neon-green" />
-          <span className="text-lg font-bold tracking-tight">
+          <span className="text-lg font-semibold tracking-tight text-foreground">
             OpenBench
           </span>
         </Link>
 
-        {/* Desktop Nav */}
+        {/* Desktop Nav — center */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
@@ -75,7 +75,7 @@ export function Header() {
           <Button
             asChild
             size="sm"
-            className="bg-neon-green text-black font-semibold hover:bg-neon-green/90 transition-all"
+            className="bg-foreground text-background font-medium rounded-full px-5 hover:bg-foreground/90 transition-all"
           >
             <Link href="/scan">{t("launchApp")}</Link>
           </Button>
@@ -92,7 +92,7 @@ export function Header() {
 
       {/* Mobile Nav */}
       {mobileOpen && (
-        <div className="md:hidden bg-cyber-bg border-b border-cyber-border p-4 space-y-4">
+        <div className="md:hidden bg-white border-b border-gray-200 p-4 space-y-4">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -118,7 +118,7 @@ export function Header() {
             <Button
               asChild
               size="sm"
-              className="bg-neon-green text-black font-semibold"
+              className="bg-foreground text-background font-medium rounded-full px-5"
             >
               <Link href="/scan">{t("launchApp")}</Link>
             </Button>

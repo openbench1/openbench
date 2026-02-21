@@ -30,7 +30,7 @@ function StatItem({
     : `${prefix}${count.toLocaleString()}${suffix}`;
 
   return (
-    <div ref={ref} className="text-center px-6 py-4">
+    <div ref={ref} className="text-center py-6 px-4">
       <div className="text-3xl sm:text-4xl font-bold text-foreground mb-1">
         {display}
       </div>
@@ -43,10 +43,10 @@ export function StatsCounter() {
   const t = useTranslations("stats");
 
   return (
-    <section className="py-16">
-      <div className="container mx-auto px-4">
-        <div className="bg-cyber-card border border-cyber-border rounded-2xl">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-cyber-border">
+    <section className="py-12">
+      <div className="container mx-auto px-6">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100">
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-gray-100">
             {STATS.map((stat) => (
               <StatItem
                 key={stat.key}

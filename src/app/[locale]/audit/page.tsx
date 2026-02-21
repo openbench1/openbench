@@ -22,15 +22,15 @@ export default function AuditPage() {
 
   return (
     <div className="min-h-screen pt-20">
-      <div className="container mx-auto px-4 py-12 max-w-5xl">
+      <div className="container mx-auto px-6 py-12 max-w-5xl">
         {/* Page Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyber-card border border-cyber-border mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gray-200 bg-white shadow-sm mb-6">
             <span className="text-sm text-muted-foreground">
               {t("badge")}
             </span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-bold mb-4">
+          <h1 className="text-3xl sm:text-5xl font-bold mb-4 text-foreground">
             {t("titleHighlight")}
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">

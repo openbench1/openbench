@@ -10,19 +10,19 @@ export function CTASection() {
 
   return (
     <section className="py-20">
-      <div className="container mx-auto px-4">
-        <div className="text-center max-w-2xl mx-auto bg-cyber-card border border-cyber-border rounded-2xl p-12 sm:p-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+      <div className="container mx-auto px-6">
+        <div className="text-center max-w-2xl mx-auto bg-foreground rounded-3xl p-12 sm:p-16">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-background">
             {t("title")}
           </h2>
-          <p className="text-muted-foreground text-lg mb-8">
+          <p className="text-background/60 text-lg mb-8">
             {t("subtitle")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               asChild
               size="lg"
-              className="bg-neon-green text-black font-bold text-base px-8 py-6 hover:bg-neon-green/90 transition-all group"
+              className="bg-neon-green text-white font-medium text-base px-8 py-6 rounded-full hover:bg-neon-green/90 transition-all group"
             >
               <Link href="/scan">
                 {t("button")}
@@ -33,7 +33,7 @@ export function CTASection() {
               asChild
               variant="outline"
               size="lg"
-              className="border-cyber-border hover:border-muted-foreground/30 hover:bg-cyber-card-hover text-base px-8 py-6"
+              className="border-background/20 text-background hover:bg-background/10 text-base px-8 py-6 rounded-full"
             >
               <Link href="/audit">
                 {t("buttonAudit")}
