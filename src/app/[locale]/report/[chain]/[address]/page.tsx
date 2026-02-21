@@ -144,7 +144,6 @@ export default async function ReportPage({ params }: ReportPageProps) {
       <EVMBenchAudit
         address={scan.address}
         chainId={scan.chainId}
-        isOpenSource={scan.tokenInfo.isOpenSource}
       />
 
       {/* Scan another */}

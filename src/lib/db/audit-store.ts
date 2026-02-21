@@ -24,6 +24,7 @@ export class PrismaAuditStore implements AuditStore {
         report: reportValue,
         error: audit.error ?? null,
         userId: audit.userId ?? null,
+        paymentTxHash: audit.paymentTxHash ?? null,
         createdAt: new Date(audit.createdAt),
         completedAt: audit.completedAt ? new Date(audit.completedAt) : null,
       },
@@ -97,6 +98,7 @@ export class PrismaAuditStore implements AuditStore {
       report: row.report ?? undefined,
       error: row.error ?? undefined,
       userId: row.userId ?? undefined,
+      paymentTxHash: row.paymentTxHash ?? undefined,
       createdAt: row.createdAt.toISOString(),
       completedAt: row.completedAt?.toISOString(),
     };

@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { code, locale } = body;
+    const { code, locale, paymentTxHash } = body;
     const engineName = (process.env.AI_ENGINE || "openai") as AIEngine;
 
     if (!code || typeof code !== "string" || code.trim().length < 10) {
@@ -34,6 +34,7 @@ export async function POST(request: NextRequest) {
       status: "analyzing",
       createdAt: new Date().toISOString(),
       userId: userId ?? undefined,
+      paymentTxHash: paymentTxHash || undefined,
     };
 
     await auditStore.saveAudit(audit);

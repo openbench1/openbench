@@ -155,6 +155,7 @@ export interface StoredAudit {
   createdAt: string;
   completedAt?: string;
   userId?: string;
+  paymentTxHash?: string;
 }
 
 export interface AuditStore {

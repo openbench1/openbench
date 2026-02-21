@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { useAudit } from "@/hooks/use-audit";
+import { PayDialog } from "@/components/payment/pay-dialog";
 import { CodeEditor } from "./code-editor";
 import { FileUpload } from "./file-upload";
 import { AuditLoading } from "./audit-loading";
@@ -65,6 +66,7 @@ export function AuditForm() {
   const [fetchingSource, setFetchingSource] = useState(false);
   const [fetchError, setFetchError] = useState<string | null>(null);
   const [fetchedContract, setFetchedContract] = useState<string | null>(null);
+  const [payDialogOpen, setPayDialogOpen] = useState(false);
 
   const handleFileContent = (content: string) => {
     setSourceCode(content);
@@ -102,146 +104,161 @@ export function AuditForm() {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (!sourceCode.trim()) return;
-
-    try {
-      const result = await submitAudit(sourceCode);
-      router.push(`/report/audit/${result.id}`);
-    } catch {
-      // Error is captured in useAudit state
-    }
+    setPayDialogOpen(true);
   };
+
+  const handlePaymentSuccess = useCallback(
+    async (txHash: string) => {
+      setPayDialogOpen(false);
+      try {
+        const result = await submitAudit(sourceCode, txHash);
+        router.push(`/report/audit/${result.id}`);
+      } catch {
+        // Error is captured in useAudit state
+      }
+    },
+    [sourceCode, submitAudit, router]
+  );
 
   if (isLoading) {
     return <AuditLoading />;
   }
 
   return (
-    <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 sm:p-8 space-y-6">
-      {(error || fetchError) && (
-        <Alert
-          variant="destructive"
-          className="border-red-200 bg-red-50"
-        >
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>{error || fetchError}</AlertDescription>
-        </Alert>
-      )}
+    <>
+      <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 sm:p-8 space-y-6">
+        {(error || fetchError) && (
+          <Alert
+            variant="destructive"
+            className="border-red-200 bg-red-50"
+          >
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>{error || fetchError}</AlertDescription>
+          </Alert>
+        )}
 
-      {/* Tab Switcher */}
-      <div className="flex gap-1 p-1 rounded-xl bg-gray-100">
-        <button
-          onClick={() => setInputMode("address")}
-          className={cn(
-            "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
-            inputMode === "address"
-              ? "bg-white text-foreground shadow-sm"
-              : "text-muted-foreground hover:text-foreground"
-          )}
-        >
-          <Search className="h-4 w-4" />
-          {t("tabs.address")}
-        </button>
-        <button
-          onClick={() => setInputMode("code")}
-          className={cn(
-            "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
-            inputMode === "code"
-              ? "bg-white text-foreground shadow-sm"
-              : "text-muted-foreground hover:text-foreground"
-          )}
-        >
-          <Code className="h-4 w-4" />
-          {t("tabs.code")}
-        </button>
+        {/* Tab Switcher */}
+        <div className="flex gap-1 p-1 rounded-xl bg-gray-100">
+          <button
+            onClick={() => setInputMode("address")}
+            className={cn(
+              "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+              inputMode === "address"
+                ? "bg-white text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            <Search className="h-4 w-4" />
+            {t("tabs.address")}
+          </button>
+          <button
+            onClick={() => setInputMode("code")}
+            className={cn(
+              "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+              inputMode === "code"
+                ? "bg-white text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            <Code className="h-4 w-4" />
+            {t("tabs.code")}
+          </button>
+        </div>
+
+        {/* Address Input Mode */}
+        {inputMode === "address" && (
+          <div className="space-y-5">
+            <p className="text-sm text-muted-foreground text-center">
+              {t("address.description")}
+            </p>
+
+            <div className="flex justify-center">
+              <ChainSelector value={chainId} onChange={setChainId} />
+            </div>
+
+            <input
+              type="text"
+              value={addressInput}
+              onChange={(e) => setAddressInput(e.target.value)}
+              placeholder={t("address.placeholder")}
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 text-sm font-mono placeholder:text-muted-foreground/40 focus:outline-none focus:ring-2 focus:ring-neon-green/20 focus:border-neon-green/50 transition-all"
+            />
+
+            {fetchedContract && (
+              <div className="flex items-center gap-2 text-sm text-neon-green bg-emerald-50 border border-emerald-200 rounded-lg px-4 py-3">
+                <CheckCircle2 className="h-4 w-4 shrink-0" />
+                {t("address.found", { name: fetchedContract })}
+              </div>
+            )}
+
+            <Button
+              onClick={handleFetchSource}
+              disabled={!addressInput.trim() || fetchingSource}
+              size="lg"
+              className="w-full bg-neon-blue text-white font-semibold text-base py-6 hover:bg-neon-blue/90 transition-all disabled:opacity-50 rounded-xl group"
+            >
+              {fetchingSource ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  {t("address.fetching")}
+                </>
+              ) : (
+                <>
+                  <Search className="mr-2 h-5 w-5" />
+                  {t("address.fetchButton")}
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
+            </Button>
+
+            <p className="text-xs text-muted-foreground text-center">
+              {t("address.hint")}
+            </p>
+          </div>
+        )}
+
+        {/* Code Input Mode */}
+        {inputMode === "code" && (
+          <div className="space-y-5">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <label className="text-sm font-medium text-muted-foreground">
+                  {t("editor.label")}
+                </label>
+                <button
+                  onClick={() => setSourceCode(EXAMPLE_CODE)}
+                  className="inline-flex items-center gap-1.5 text-xs text-neon-blue hover:text-foreground transition-colors bg-gray-50 border border-gray-200 rounded-full px-3 py-1"
+                >
+                  <FileCode2 className="h-3.5 w-3.5" />
+                  {t("editor.loadExample")}
+                </button>
+              </div>
+              <CodeEditor value={sourceCode} onChange={setSourceCode} />
+            </div>
+
+            <FileUpload onFileContent={handleFileContent} />
+
+            <Button
+              onClick={handleSubmit}
+              disabled={!sourceCode.trim() || isLoading}
+              size="lg"
+              className="w-full bg-foreground text-background font-semibold text-base py-6 hover:bg-foreground/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-xl group"
+            >
+              <Shield className="mr-2 h-5 w-5" />
+              {isLoading ? t("submitting") : t("submit")}
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </div>
+        )}
       </div>
 
-      {/* Address Input Mode */}
-      {inputMode === "address" && (
-        <div className="space-y-5">
-          <p className="text-sm text-muted-foreground text-center">
-            {t("address.description")}
-          </p>
-
-          <div className="flex justify-center">
-            <ChainSelector value={chainId} onChange={setChainId} />
-          </div>
-
-          <input
-            type="text"
-            value={addressInput}
-            onChange={(e) => setAddressInput(e.target.value)}
-            placeholder={t("address.placeholder")}
-            className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 text-sm font-mono placeholder:text-muted-foreground/40 focus:outline-none focus:ring-2 focus:ring-neon-green/20 focus:border-neon-green/50 transition-all"
-          />
-
-          {fetchedContract && (
-            <div className="flex items-center gap-2 text-sm text-neon-green bg-emerald-50 border border-emerald-200 rounded-lg px-4 py-3">
-              <CheckCircle2 className="h-4 w-4 shrink-0" />
-              {t("address.found", { name: fetchedContract })}
-            </div>
-          )}
-
-          <Button
-            onClick={handleFetchSource}
-            disabled={!addressInput.trim() || fetchingSource}
-            size="lg"
-            className="w-full bg-neon-blue text-white font-semibold text-base py-6 hover:bg-neon-blue/90 transition-all disabled:opacity-50 rounded-xl group"
-          >
-            {fetchingSource ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                {t("address.fetching")}
-              </>
-            ) : (
-              <>
-                <Search className="mr-2 h-5 w-5" />
-                {t("address.fetchButton")}
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </>
-            )}
-          </Button>
-
-          <p className="text-xs text-muted-foreground text-center">
-            {t("address.hint")}
-          </p>
-        </div>
-      )}
-
-      {/* Code Input Mode */}
-      {inputMode === "code" && (
-        <div className="space-y-5">
-          <div>
-            <div className="flex items-center justify-between mb-3">
-              <label className="text-sm font-medium text-muted-foreground">
-                {t("editor.label")}
-              </label>
-              <button
-                onClick={() => setSourceCode(EXAMPLE_CODE)}
-                className="inline-flex items-center gap-1.5 text-xs text-neon-blue hover:text-foreground transition-colors bg-gray-50 border border-gray-200 rounded-full px-3 py-1"
-              >
-                <FileCode2 className="h-3.5 w-3.5" />
-                {t("editor.loadExample")}
-              </button>
-            </div>
-            <CodeEditor value={sourceCode} onChange={setSourceCode} />
-          </div>
-
-          <FileUpload onFileContent={handleFileContent} />
-
-          <Button
-            onClick={handleSubmit}
-            disabled={!sourceCode.trim() || isLoading}
-            size="lg"
-            className="w-full bg-foreground text-background font-semibold text-base py-6 hover:bg-foreground/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-xl group"
-          >
-            <Shield className="mr-2 h-5 w-5" />
-            {isLoading ? t("submitting") : t("submit")}
-            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
-        </div>
-      )}
-    </div>
+      <PayDialog
+        open={payDialogOpen}
+        onOpenChange={setPayDialogOpen}
+        onPaymentSuccess={handlePaymentSuccess}
+      />
+    </>
   );
 }

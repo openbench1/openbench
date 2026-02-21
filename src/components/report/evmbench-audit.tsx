@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { Brain, Loader2, CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
+import { Brain, Loader2, CheckCircle2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { VulnerabilityCard } from "./vulnerability-card";
@@ -13,7 +13,7 @@ import type { AuditReport } from "@/lib/types";
 interface EVMBenchAuditProps {
   address: string;
   chainId: string;
-  isOpenSource: boolean;
+  isOpenSource?: boolean;
 }
 
 type AuditState =
@@ -25,7 +25,7 @@ type AuditState =
 
 const POLL_INTERVAL = 3000;
 
-export function EVMBenchAudit({ address, chainId, isOpenSource }: EVMBenchAuditProps) {
+export function EVMBenchAudit({ address, chainId }: EVMBenchAuditProps) {
   const t = useTranslations("report.evmbench");
   const [state, setState] = useState<AuditState>({ phase: "idle" });
   const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -87,31 +87,6 @@ export function EVMBenchAudit({ address, chainId, isOpenSource }: EVMBenchAuditP
       setState({ phase: "failed", error: "Network error" });
     }
   }, [address, chainId, pollStatus]);
-
-  // Not open source: show info message
-  if (!isOpenSource) {
-    return (
-      <Card className="bg-cyber-card border-cyber-border">
-        <CardHeader>
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-lg bg-neon-blue/10 flex items-center justify-center">
-              <Brain className="h-5 w-5 text-neon-blue" />
-            </div>
-            <div>
-              <CardTitle className="text-lg">{t("title")}</CardTitle>
-              <p className="text-sm text-muted-foreground">{t("description")}</p>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center gap-2 text-muted-foreground text-sm bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-4">
-            <AlertTriangle className="h-4 w-4 text-yellow-500 shrink-0" />
-            <span>{t("noSource")}</span>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
 
   return (
     <Card className="bg-cyber-card border-cyber-border">

@@ -293,6 +293,21 @@
       }
     }
   },
+  "payment": {
+    "title": "Payment Required",
+    "description": "An AI audit requires a token payment. Please confirm the transaction below.",
+    "amount": "Audit Fee",
+    "balance": "Your Balance",
+    "network": "Network",
+    "connectWallet": "Connect Wallet",
+    "payButton": "Pay {amount} {symbol}",
+    "confirming": "Confirm in Wallet...",
+    "waiting": "Waiting for Confirmation...",
+    "success": "Payment successful!",
+    "viewTx": "View on BscScan",
+    "continue": "Continue to Audit",
+    "insufficientBalance": "Insufficient Balance"
+  },
   "footer": {
     "description": "EVMBench-powered security. Protecting traders from scam tokens, one scan at a time.",
     "product": "Product",
