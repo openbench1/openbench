@@ -7,10 +7,20 @@ import { useAudit } from "@/hooks/use-audit";
 import { CodeEditor } from "./code-editor";
 import { FileUpload } from "./file-upload";
 import { AuditLoading } from "./audit-loading";
+import { ChainSelector } from "@/components/scan/chain-selector";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
-import { Shield, AlertCircle, FileCode2 } from "lucide-react";
+import {
+  Shield,
+  AlertCircle,
+  FileCode2,
+  Code,
+  Search,
+  Loader2,
+  CheckCircle2,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const EXAMPLE_CODE = `// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
@@ -42,14 +52,54 @@ contract MyToken is ERC20, Ownable {
     }
 }`;
 
+type InputMode = "address" | "code";
+
 export function AuditForm() {
   const t = useTranslations("audit");
   const router = useRouter();
   const { isLoading, error, submitAudit } = useAudit();
   const [sourceCode, setSourceCode] = useState("");
+  const [inputMode, setInputMode] = useState<InputMode>("address");
+  const [addressInput, setAddressInput] = useState("");
+  const [chainId, setChainId] = useState("bsc");
+  const [fetchingSource, setFetchingSource] = useState(false);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+  const [fetchedContract, setFetchedContract] = useState<string | null>(null);
 
   const handleFileContent = (content: string) => {
     setSourceCode(content);
+    setInputMode("code");
+  };
+
+  const handleFetchSource = async () => {
+    if (!addressInput.trim()) return;
+
+    setFetchingSource(true);
+    setFetchError(null);
+    setFetchedContract(null);
+
+    try {
+      const response = await fetch("/api/source", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input: addressInput.trim(), chainId }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setFetchError(data.error || "Failed to fetch source code");
+        return;
+      }
+
+      setSourceCode(data.sourceCode);
+      setFetchedContract(data.contractName);
+      setInputMode("code");
+    } catch {
+      setFetchError("Network error. Please try again.");
+    } finally {
+      setFetchingSource(false);
+    }
   };
 
   const handleSubmit = async () => {
@@ -69,45 +119,129 @@ export function AuditForm() {
 
   return (
     <div className="space-y-6">
-      {error && (
+      {(error || fetchError) && (
         <Alert
           variant="destructive"
           className="border-severity-critical/30 bg-severity-critical/5"
         >
           <AlertCircle className="h-4 w-4" />
-          <AlertDescription>{error}</AlertDescription>
+          <AlertDescription>{error || fetchError}</AlertDescription>
         </Alert>
       )}
 
-      <div>
-        <div className="flex items-center justify-between mb-2">
-          <label className="text-sm font-medium text-muted-foreground">
-            {t("editor.label")}
-          </label>
-          <button
-            onClick={() => setSourceCode(EXAMPLE_CODE)}
-            className="inline-flex items-center gap-1.5 text-xs text-neon-blue hover:text-neon-green transition-colors"
-          >
-            <FileCode2 className="h-3.5 w-3.5" />
-            {t("editor.loadExample")}
-          </button>
-        </div>
-        <CodeEditor value={sourceCode} onChange={setSourceCode} />
+      {/* Tab Switcher */}
+      <div className="flex gap-2 p-1 bg-cyber-card border border-cyber-border rounded-lg">
+        <button
+          onClick={() => setInputMode("address")}
+          className={cn(
+            "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-md text-sm font-medium transition-all",
+            inputMode === "address"
+              ? "bg-neon-green/10 text-neon-green border border-neon-green/30"
+              : "text-muted-foreground hover:text-foreground"
+          )}
+        >
+          <Search className="h-4 w-4" />
+          {t("tabs.address")}
+        </button>
+        <button
+          onClick={() => setInputMode("code")}
+          className={cn(
+            "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-md text-sm font-medium transition-all",
+            inputMode === "code"
+              ? "bg-neon-green/10 text-neon-green border border-neon-green/30"
+              : "text-muted-foreground hover:text-foreground"
+          )}
+        >
+          <Code className="h-4 w-4" />
+          {t("tabs.code")}
+        </button>
       </div>
 
-      <FileUpload onFileContent={handleFileContent} />
+      {/* Address Input Mode */}
+      {inputMode === "address" && (
+        <div className="space-y-4">
+          <p className="text-sm text-muted-foreground">
+            {t("address.description")}
+          </p>
 
-      <Separator className="bg-cyber-border" />
+          <div className="flex justify-center">
+            <ChainSelector value={chainId} onChange={setChainId} />
+          </div>
 
-      <Button
-        onClick={handleSubmit}
-        disabled={!sourceCode.trim() || isLoading}
-        size="lg"
-        className="w-full bg-neon-green text-black font-bold text-lg py-6 hover:shadow-neon-green transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        <Shield className="mr-2 h-5 w-5" />
-        {isLoading ? t("submitting") : t("submit")}
-      </Button>
+          <input
+            type="text"
+            value={addressInput}
+            onChange={(e) => setAddressInput(e.target.value)}
+            placeholder={t("address.placeholder")}
+            className="w-full bg-cyber-bg border border-cyber-border rounded-lg px-4 py-3 text-sm font-mono placeholder:text-muted-foreground/50 focus:outline-none focus:border-neon-green/50 transition-colors"
+          />
+
+          {fetchedContract && (
+            <div className="flex items-center gap-2 text-sm text-neon-green">
+              <CheckCircle2 className="h-4 w-4" />
+              {t("address.found", { name: fetchedContract })}
+            </div>
+          )}
+
+          <Button
+            onClick={handleFetchSource}
+            disabled={!addressInput.trim() || fetchingSource}
+            size="lg"
+            className="w-full bg-neon-blue/80 text-white font-bold text-lg py-6 hover:bg-neon-blue transition-all duration-300 disabled:opacity-50"
+          >
+            {fetchingSource ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                {t("address.fetching")}
+              </>
+            ) : (
+              <>
+                <Search className="mr-2 h-5 w-5" />
+                {t("address.fetchButton")}
+              </>
+            )}
+          </Button>
+
+          <p className="text-xs text-muted-foreground text-center">
+            {t("address.hint")}
+          </p>
+        </div>
+      )}
+
+      {/* Code Input Mode */}
+      {inputMode === "code" && (
+        <>
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-sm font-medium text-muted-foreground">
+                {t("editor.label")}
+              </label>
+              <button
+                onClick={() => setSourceCode(EXAMPLE_CODE)}
+                className="inline-flex items-center gap-1.5 text-xs text-neon-blue hover:text-neon-green transition-colors"
+              >
+                <FileCode2 className="h-3.5 w-3.5" />
+                {t("editor.loadExample")}
+              </button>
+            </div>
+            <CodeEditor value={sourceCode} onChange={setSourceCode} />
+          </div>
+
+          <FileUpload onFileContent={handleFileContent} />
+
+          <Separator className="bg-cyber-border" />
+
+          <Button
+            onClick={handleSubmit}
+            disabled={!sourceCode.trim() || isLoading}
+            size="lg"
+            className="w-full bg-neon-green text-black font-bold text-lg py-6 hover:shadow-neon-green transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <Shield className="mr-2 h-5 w-5" />
+            {isLoading ? t("submitting") : t("submit")}
+          </Button>
+        </>
+      )}
     </div>
   );
 }

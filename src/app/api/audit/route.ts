@@ -6,6 +6,9 @@ import { nanoid } from "nanoid";
 import { getOptionalUserId } from "@/lib/auth/helpers";
 import { checkRateLimit } from "@/lib/rate-limit/check";
 
+// Run in US region to avoid OpenAI geo-blocking (Vercel default is hkg1)
+export const preferredRegion = "iad1";
+
 export async function POST(request: NextRequest) {
   const rateLimited = await checkRateLimit(request);
   if (rateLimited) return rateLimited;
