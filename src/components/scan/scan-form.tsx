@@ -16,7 +16,7 @@ export function ScanForm() {
   const t = useTranslations("scan");
   const router = useRouter();
   const [address, setAddress] = useState("");
-  const [chainId, setChainId] = useState("eth");
+  const [chainId, setChainId] = useState("bsc");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

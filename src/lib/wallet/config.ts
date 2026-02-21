@@ -7,7 +7,7 @@ export const wagmiConfig = projectId
   ? getDefaultConfig({
       appName: "OpenBench",
       projectId,
-      chains: [mainnet, bsc],
+      chains: [bsc, mainnet],
       ssr: true,
     })
   : null;
