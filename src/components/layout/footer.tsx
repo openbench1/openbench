@@ -82,6 +82,11 @@ export function Footer() {
             <h4 className="font-semibold text-sm mb-3 text-foreground">{t("resources")}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
+                <Link href="/whitepaper" className="hover:text-foreground transition-colors">
+                  {t("whitepaperLink")}
+                </Link>
+              </li>
+              <li>
                 <a
                   href="https://github.com/openbench1/openbench#readme"
                   target="_blank"

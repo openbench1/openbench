@@ -339,6 +339,122 @@
     "legal": "Legal",
     "privacyLink": "Privacy Policy",
     "termsLink": "Terms of Service",
+    "whitepaperLink": "Whitepaper",
     "copyright": "\u00a9 2026 OpenBench. All rights reserved."
+  },
+  "whitepaper": {
+    "metaTitle": "OpenBench Whitepaper",
+    "metaDesc": "OpenBench — EVMBench-powered smart contract security platform. Project overview, technology architecture, and OBT token economics.",
+    "version": "v1.0 — February 2026",
+    "title": "OpenBench Whitepaper",
+    "subtitle": "EVMBench-powered smart contract security platform. Protecting every trader from scam tokens and vulnerable contracts.",
+    "tocTitle": "Table of Contents",
+    "toc": {
+      "abstract": "Executive Summary",
+      "problem": "Problem Statement",
+      "solution": "Our Solution",
+      "modules": "Product Modules",
+      "tech": "Technology Architecture",
+      "token": "OBT Token Economics",
+      "roadmap": "Roadmap",
+      "security": "Security & Trust"
+    },
+    "abstract": {
+      "p1": "OpenBench is a comprehensive smart contract security platform built on the EVMBench benchmark framework jointly developed by OpenAI and Paradigm. We provide one-click security scanning for EVM-based tokens, NFTs, and DeFi protocols, combining automated risk detection with AI-powered deep code auditing.",
+      "p2": "Our mission is to democratize smart contract security — making professional-grade vulnerability detection accessible to every trader, investor, and developer in the Web3 ecosystem. With support for Ethereum and BNB Smart Chain, OpenBench covers the vast majority of on-chain assets where retail users face the greatest risks."
+    },
+    "problem": {
+      "p1": "The Web3 ecosystem faces a crisis of trust. In 2024-2025 alone, billions of dollars were lost to scam tokens, rug pulls, and smart contract exploits. Retail traders are the most vulnerable — lacking the technical expertise to evaluate contract security before investing.",
+      "scamTitle": "Honeypot & Scam Tokens",
+      "scamDesc": "Tokens designed so buyers cannot sell. Thousands deployed daily across EVM chains, targeting retail traders.",
+      "taxTitle": "Hidden Tax Traps",
+      "taxDesc": "Contracts with concealed buy/sell taxes that silently drain user funds with each transaction.",
+      "rugTitle": "Rug Pulls",
+      "rugDesc": "Developers removing liquidity or exploiting admin functions to drain all funds from token holders.",
+      "mevTitle": "MEV & Front-Running",
+      "mevDesc": "Sandwich attacks and front-running exploits that extract value from ordinary users' transactions."
+    },
+    "solution": {
+      "p1": "OpenBench addresses these challenges through a multi-layered security approach, combining real-time risk scanning with deep AI code analysis:",
+      "detectTitle": "Instant Risk Detection",
+      "detectDesc": "One-click scanning for honeypots, hidden taxes, rug pull indicators, and whale concentration risks.",
+      "auditTitle": "EVMBench AI Audit",
+      "auditDesc": "Deep code analysis based on the EVMBench 16-category vulnerability taxonomy with 200+ attack patterns.",
+      "realtimeTitle": "Real-Time Data",
+      "realtimeDesc": "Live on-chain data from GoPlus Security API, Etherscan, and BSCScan for up-to-date risk assessment.",
+      "multichainTitle": "Multi-Chain Coverage",
+      "multichainDesc": "Full support for Ethereum and BNB Smart Chain, with more EVM chains planned."
+    },
+    "modules": {
+      "p1": "OpenBench is organized into six specialized security modules, each targeting a specific category of Web3 risk:",
+      "tokenTitle": "Token Scanner",
+      "tokenDesc": "Honeypot detection, tax analysis, holder distribution, liquidity lock verification, and comprehensive risk scoring for ERC-20 tokens.",
+      "nftTitle": "NFT Scanner",
+      "nftDesc": "Security analysis for NFT contracts — detecting fake mints, metadata manipulation, rug pull mechanisms, and royalty exploits.",
+      "nfaTitle": "NFA Analysis",
+      "nfaDesc": "Non-Fungible Asset risk assessment — evaluating collection legitimacy, contract permissions, and market manipulation indicators.",
+      "mevTitle": "MEV Detection",
+      "mevDesc": "Identify MEV risks including sandwich attacks, front-running vulnerabilities, and arbitrage exploit vectors in DeFi interactions.",
+      "flashLoanTitle": "Flash Loan Analysis",
+      "flashLoanDesc": "Detect flash loan attack vectors — oracle manipulation, governance attacks, liquidity pool exploits, and collateral ratio manipulation.",
+      "auditTitle": "AI Code Audit",
+      "auditDesc": "Full EVMBench-standard code audit with GPT-4o and Claude. 16-category vulnerability scanning, SWC-aligned findings, and fix recommendations."
+    },
+    "tech": {
+      "p1": "OpenBench integrates multiple security data sources and AI models into a unified analysis pipeline:",
+      "evmbenchTitle": "EVMBench Framework",
+      "evmbenchDesc": "The core detection engine is built on EVMBench, the smart contract security benchmark by OpenAI × Paradigm. It covers 120 real-world vulnerabilities from 40 professional audits, organized into 16 categories aligned with the SWC Registry.",
+      "aiTitle": "AI Engines (GPT-4o & Claude)",
+      "aiDesc": "Deep code analysis powered by OpenAI GPT-4o and Anthropic Claude. The AI engines systematically check all 16 vulnerability categories, providing severity ratings, SWC IDs, exact code locations, and concrete fix recommendations.",
+      "goplusTitle": "GoPlus Security API",
+      "goplusDesc": "Real-time token risk data including honeypot detection, tax calculation, holder analysis, liquidity info, and contract permission checks across EVM chains.",
+      "chainTitle": "Etherscan V2 API",
+      "chainDesc": "Fetches verified smart contract source code from Etherscan and BSCScan via the unified V2 API for AI code auditing."
+    },
+    "token": {
+      "p1": "The OBT (OpenBench Token) is the native utility token of the OpenBench platform, deployed on BNB Smart Chain as a standard ERC-20 (BEP-20) token.",
+      "infoTitle": "Token Information",
+      "name": "Token Name",
+      "standard": "Standard",
+      "chain": "Blockchain",
+      "decimals": "Decimals",
+      "utilityTitle": "Token Utility",
+      "auditPayTitle": "AI Audit Payments",
+      "auditPayDesc": "Pay 100 OBT per AI smart contract audit. Tokens are transferred to the platform treasury upon audit submission.",
+      "apiAccessTitle": "API Access",
+      "apiAccessDesc": "1 OBT per API call for programmatic access to OpenBench scanning and audit services.",
+      "premiumTitle": "Premium Features",
+      "premiumDesc": "Unlock advanced analysis features including batch scanning, custom reports, and priority processing.",
+      "governanceTitle": "Future Governance",
+      "governanceDesc": "OBT holders will participate in platform governance decisions including fee adjustments and feature prioritization.",
+      "pricingTitle": "Pricing",
+      "auditPrice": "AI Code Audit",
+      "apiPrice": "API Call",
+      "distributionTitle": "Token Distribution",
+      "dist": {
+        "community": "Community & Airdrops",
+        "ecosystem": "Ecosystem Development",
+        "team": "Team & Advisors (12-month vesting)",
+        "liquidity": "Initial Liquidity",
+        "reserve": "Reserve Fund"
+      }
+    },
+    "roadmap": {
+      "q1Title": "Q1 2026 — Foundation",
+      "q1Desc": "Token Scanner (ETH + BSC), AI Code Audit (GPT-4o + Claude), EVMBench vulnerability taxonomy integration, token payment system, basic dashboard.",
+      "q2Title": "Q2 2026 — Expansion",
+      "q2Desc": "NFT Scanner module, NFA Analysis module, OBT token deployment on BSC, API access program, multi-language support expansion.",
+      "q3Title": "Q3 2026 — Advanced Security",
+      "q3Desc": "MEV Detection module, Flash Loan Analysis module, real-time monitoring alerts, additional EVM chain support (Polygon, Arbitrum, Base).",
+      "q4Title": "Q4 2026 — Ecosystem Growth",
+      "q4Desc": "Community governance framework, premium tier features, security score API for DeFi integrations, mobile app, strategic partnerships."
+    },
+    "security": {
+      "p1": "OpenBench is committed to transparency and security. Our platform source code is fully open-source under the MIT license on GitHub. All scanning results are derived from publicly verifiable on-chain data and deterministic AI analysis.",
+      "p2": "We do not collect personal information, store private keys, or require account registration for basic scanning. Wallet connections are used solely for token payment transactions. All API communications are encrypted via HTTPS."
+    },
+    "cta": "Start protecting your investments today.",
+    "ctaScan": "Scan a Token",
+    "ctaAudit": "AI Code Audit"
   }
 }
